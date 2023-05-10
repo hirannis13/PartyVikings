@@ -1,6 +1,7 @@
 import { Button, Typography } from "@mui/material";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import UserList from "../utils/UserList";
 
 function Accounts() {
   const navigate = useNavigate();
@@ -17,6 +18,7 @@ function Accounts() {
       >
         Create new account
       </Button>
+      <UserList />
     </>
   );
 }
