@@ -5,7 +5,13 @@ import Box from "@mui/material/Box";
 function CircularAnalyticsWithLabel({ percentage }) {
   return (
     <Box sx={{ position: "relative", display: "inline-flex" }}>
-      <CircularProgress variant="determinate" value={percentage} />
+      <CircularProgress
+        variant="determinate"
+        value={percentage}
+        thickness={7}
+        size={"13vh"}
+        sx={{ color: "#2A403E", strokeLinecap: "round" }}
+      />
       <Box
         sx={{
           top: 0,
@@ -22,6 +28,7 @@ function CircularAnalyticsWithLabel({ percentage }) {
           variant="caption"
           component="div"
           color="text.secondary"
+          fontSize={"2.3vh"}
         >{`${percentage}%`}</Typography>
       </Box>
     </Box>
