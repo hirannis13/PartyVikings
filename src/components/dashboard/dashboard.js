@@ -1,8 +1,10 @@
 import React from "react";
 import { Grid } from "@mui/material";
 import "./dashboard.css";
+import { Box } from "@mui/material";
 import UserWelcome from "../userWelcome/userWelcome";
 import TiktokComponent from "../socialcheck/tiktok";
+import Calendar from "../calendar/Calendar";
 import InstagramComponent from "../socialcheck/instagram";
 
 function Dashboard() {
@@ -31,6 +33,9 @@ function Dashboard() {
           </Grid>
         </Grid>
       </Grid>
+      <Box>
+        <Calendar />
+      </Box>
     </>
   );
 }
