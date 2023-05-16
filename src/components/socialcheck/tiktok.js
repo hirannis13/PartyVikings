@@ -5,55 +5,69 @@ import { db } from "../../service/authService";
 import CircularAnalyticsWithLabel from "../utils/CircularAnalyticsWithLabel";
 
 const TiktokComponent = () => {
-  const [colors, setColors] = useState([]);
+  const [days, setDays] = useState([]);
 
   useEffect(() => {
-    const fetchColors = async () => {
+    const fetchDays = async () => {
       const querySnapshot = await getDocs(collection(db, "tiktokcheck"));
-      const colorsData = querySnapshot.docs.map((doc) => {
+      const daysData = querySnapshot.docs.map((doc) => {
         const data = doc.data();
         return { id: doc.id, ...data };
       });
-      console.log(colorsData);
-      setColors(colorsData);
+      setDays(daysData);
     };
 
-    fetchColors();
+    fetchDays();
   }, []);
 
   const currentDay = new Date().toLocaleDateString("en-US", {
     weekday: "long",
   });
-  const currentColor = colors.find((color) =>
-    color.id.includes(currentDay.toLowerCase())
+  const findCurrentDay = days.find((day) =>
+    day.id.includes(currentDay.toLowerCase())
   );
+
   return (
     <>
       <Card
-        variant="outlined"
-        sx={{ display: "flex", flexDirection: "row", maxWidth: "fit-content" }}
+        sx={{
+          display: "flex",
+          flexDirection: "row",
+          maxWidth: "fit-content",
+          borderRadius: "1vw",
+          padding: "3vh 3vw",
+          boxShadow: 4,
+        }}
       >
         <Box
           sx={{
             display: "flex",
-            p: "8px",
+            p: "0 2vw 0 0",
             alignItems: "center",
             justifyContent: "center",
           }}
         >
-          <CircularAnalyticsWithLabel percentage={45} />
+          <CircularAnalyticsWithLabel percentage={findCurrentDay?.percentage} />
         </Box>
         <Box
           sx={{
             display: "flex",
-            alignItems: "center",
+            alignItems: "left",
             flexDirection: "column",
-            paddingX: "16px",
+            paddingX: "2vh",
           }}
         >
           <Typography variant="h5">TikTok</Typography>
-          <Typography variant="h6">{currentDay}s' forcast:</Typography>
-          <Typography>Morning post time {currentColor?.timeone}</Typography>
+          <Typography
+            variant="h6"
+            sx={{
+              padding: "0 0 2vh 0",
+            }}
+          >
+            {currentDay}
+          </Typography>
+          <Typography variant="h6"> {findCurrentDay?.timeone}</Typography>
+          <Typography variant="h6"> {findCurrentDay?.timetwo}</Typography>
         </Box>
       </Card>
     </>

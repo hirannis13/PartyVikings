@@ -25,6 +25,7 @@ function App() {
   }, [navigate]);
   return (
     <>
+      <TemporaryDrawer />
       <Routes>
         <>
           <Route path="/" element={<SignIn />} />
@@ -40,7 +41,6 @@ function App() {
           <Route path="/signUp" element={<SignUp />} />
         </>
       </Routes>
-      <TemporaryDrawer />
     </>
   );
 }
