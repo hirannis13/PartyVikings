@@ -14,7 +14,6 @@ const TiktokComponent = () => {
         const data = doc.data();
         return { id: doc.id, ...data };
       });
-      console.log(colorsData);
       setColors(colorsData);
     };
 

@@ -22,7 +22,6 @@ export default function SignUp() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log(data.get("name"));
     try {
       const user = await signUp(data.get("email"), data.get("password"));
       assignName(navigate, data.get("name"));
