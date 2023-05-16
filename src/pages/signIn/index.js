@@ -11,12 +11,23 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 import { signIn } from "../../service/authService";
+import { auth } from "../../service/authService";
 
 const theme = createTheme();
 
 export default function SignIn() {
   let navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        navigate("/dashboard");
+      }
+    });
+    return unsubscribe;
+  }, [navigate]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

@@ -8,8 +8,21 @@ import Todo from "./components/todo/todo";
 import Files from "./components/files/files";
 import Accounts from "./components/accounts/accounts";
 import { Route, Routes } from "react-router-dom";
+import { useNavigate } from "react-router";
+import { auth } from "./service/authService";
+import { useEffect } from "react";
 
 function App() {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (!user) {
+        navigate("/");
+      }
+    });
+    return unsubscribe;
+  }, [navigate]);
   return (
     <>
       <Routes>
