@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { db } from "../../service/authService";
 import { collection, getDocs } from "firebase/firestore";
 import { Person } from "@mui/icons-material";
@@ -32,6 +32,18 @@ const UserList = () => {
     };
     fetchUsers();
   }, []);
+  //{ id: 1, imgUrl: `${process.env.PUBLIC_URL}/images/viking1.svg` },
+  const CustomPerson = ({ imageUrl }) => (
+    <div>
+      {imageUrl && (
+        <img
+          style={{ height: "9vh", transform: "translate(0, 1vh)" }}
+          src={imageUrl}
+          alt="Person"
+        />
+      )}
+    </div>
+  );
 
   return (
     <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
@@ -45,9 +57,8 @@ const UserList = () => {
           }}
         >
           {users.map((user) => (
-            <>
+            <Fragment key={user.id}>
               <CardContent
-                key={user.id}
                 sx={{
                   display: "flex",
                   flexDirection: "row",
@@ -56,7 +67,14 @@ const UserList = () => {
                 }}
               >
                 <Avatar sx={{ margin: "0 2vw 0 0" }}>
-                  <Person />
+                  {user.imgUrl ? (
+                    <CustomPerson
+                      key={user.imgId}
+                      imageUrl={`${process.env.PUBLIC_URL}` + user.imgUrl}
+                    />
+                  ) : (
+                    <Person />
+                  )}
                 </Avatar>
                 <Grid>
                   <Typography
@@ -78,7 +96,7 @@ const UserList = () => {
                   borderRadius: "5px",
                 }}
               />
-            </>
+            </Fragment>
           ))}
         </Card>
       ) : (

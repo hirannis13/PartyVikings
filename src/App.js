@@ -8,12 +8,14 @@ import Todo from "./components/todo/todo";
 import Files from "./components/files/files";
 import Accounts from "./components/accounts/accounts";
 import { Route, Routes } from "react-router-dom";
-import { useNavigate } from "react-router";
+import { useNavigate, useLocation } from "react-router";
 import { auth } from "./service/authService";
 import { useEffect } from "react";
 
 function App() {
   const navigate = useNavigate();
+  const location = useLocation();
+  const currentLocation = location.pathname;
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -23,9 +25,10 @@ function App() {
     });
     return unsubscribe;
   }, [navigate]);
+
   return (
     <>
-      <TemporaryDrawer />
+      {currentLocation !== "/signUp" && <TemporaryDrawer />}
       <Routes>
         <>
           <Route path="/" element={<SignIn />} />

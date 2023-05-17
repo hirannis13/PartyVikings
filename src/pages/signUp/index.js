@@ -1,3 +1,4 @@
+/* eslint-disable no-template-curly-in-string */
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -5,7 +6,6 @@ import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
@@ -13,25 +13,89 @@ import { useNavigate } from "react-router-dom";
 import { signUp, assignName } from "../../service/authService";
 import Iconify from "../../components/utils/Iconify";
 import { IconButton } from "@mui/material";
-
-const theme = createTheme();
+import { useState } from "react";
 
 export default function SignUp() {
   const navigate = useNavigate();
 
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [name, setName] = useState("");
+  const [nameError, setNameError] = useState("");
+  const [email, setEmail] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [password, setPassword] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+  const imageContainer = [
+    { id: 1, imgUrl: `${process.env.PUBLIC_URL}/images/viking1.svg` },
+    { id: 2, imgUrl: `${process.env.PUBLIC_URL}/images/viking2.svg` },
+    { id: 3, imgUrl: `${process.env.PUBLIC_URL}/images/viking3.svg` },
+    { id: 4, imgUrl: `${process.env.PUBLIC_URL}/images/viking4.svg` },
+    { id: 5, imgUrl: `${process.env.PUBLIC_URL}/images/viking5.svg` },
+  ];
+
+  const validateName = () => {
+    if (name.trim() === "") {
+      setNameError("Name cannot be empty");
+      return false;
+    }
+    setNameError("");
+    return true;
+  };
+
+  const validateEmail = () => {
+    if (email.trim() === "") {
+      setEmailError("Email cannot be empty");
+      return false;
+    }
+    if (!email.includes("@")) {
+      setEmailError("Invalid email address");
+      return false;
+    }
+    setEmailError("");
+    return true;
+  };
+
+  const validatePassword = () => {
+    if (password.trim() === "") {
+      setPasswordError("Password cannot be empty");
+      return false;
+    }
+    if (password.length < 6) {
+      setPasswordError("Password must be at least 6 characters long");
+      return false;
+    }
+    setPasswordError("");
+    return true;
+  };
+
+  const handleImageSelect = (imageId) => {
+    const selectedImg = imageContainer.find((img) => img.id === imageId);
+    setSelectedImage(selectedImg);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    try {
-      const user = await signUp(data.get("email"), data.get("password"));
-      assignName(navigate, data.get("name"));
-      console.log("User signed up and name assigned successfully", user);
-    } catch (error) {
-      console.log("Error signing up or assigning name", error);
+
+    const isNameValid = validateName();
+    const isEmailValid = validateEmail();
+    const isPasswordValid = validatePassword();
+
+    if (isNameValid && isEmailValid && isPasswordValid) {
+      const data = new FormData(event.currentTarget);
+      try {
+        await signUp(data.get("email"), data.get("password"));
+        assignName(navigate, data.get("name"), selectedImage);
+        console.log("User signed up and name assigned successfully");
+      } catch (error) {
+        console.log("Error signing up or assigning name", error);
+      }
     }
   };
+
   return (
-    <ThemeProvider theme={theme}>
+    <>
+      {" "}
       <IconButton
         onClick={() => {
           navigate(-1);
@@ -73,6 +137,10 @@ export default function SignUp() {
                   id="name"
                   label="Name"
                   name="name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  error={!!nameError}
+                  helperText={nameError}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -82,7 +150,10 @@ export default function SignUp() {
                   id="email"
                   label="Email Address"
                   name="email"
-                  autoComplete="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  error={!!emailError}
+                  helperText={emailError}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -93,9 +164,33 @@ export default function SignUp() {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  error={!!passwordError}
+                  helperText={passwordError}
                 />
               </Grid>
+            </Grid>
+            <Grid
+              container
+              sx={{ marginTop: "1rem", justifyContent: "space-evenly" }}
+            >
+              {imageContainer.map((img) => (
+                <Grid key={img.id} item>
+                  <img
+                    src={img.imgUrl}
+                    alt={`Viking img ${img.id}`}
+                    onClick={() => handleImageSelect(img.id)}
+                    style={{
+                      cursor: "pointer",
+                      filter:
+                        selectedImage?.id === img.id
+                          ? "drop-shadow(0 0 5px blue)"
+                          : "none",
+                    }}
+                  />
+                </Grid>
+              ))}
             </Grid>
             <Button
               type="submit"
@@ -108,6 +203,6 @@ export default function SignUp() {
           </Box>
         </Box>
       </Container>
-    </ThemeProvider>
+    </>
   );
 }
