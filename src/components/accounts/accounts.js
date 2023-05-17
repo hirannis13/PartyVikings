@@ -8,16 +8,24 @@ function Accounts() {
 
   return (
     <>
-      <Typography>Accounts</Typography>
-      <Button
-        variant="outlined"
-        color="info"
-        onClick={() => {
-          navigate("/signUp");
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          width: "90%",
+          marginBottom: "5vh",
         }}
       >
-        Create new account
-      </Button>
+        <Button
+          variant="outlined"
+          color="info"
+          onClick={() => {
+            navigate("/signUp");
+          }}
+        >
+          Create new account
+        </Button>
+      </div>
       <UserList />
     </>
   );
