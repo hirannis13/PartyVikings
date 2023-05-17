@@ -28,7 +28,7 @@ const CardStyled = styled(Card)(({ active, pictureurl, issearchcard }) => ({
   }),
 }));
 
-const Carousel = ({ categories }) => {
+const Carousel = ({ categories, searchValue, setSearchValue }) => {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const handlePrev = () => {
@@ -45,6 +45,9 @@ const Carousel = ({ categories }) => {
 
   const handleCardClick = (index) => {
     setActiveIndex(index);
+  };
+  const handleInputChange = (event) => {
+    setSearchValue(event.target.value);
   };
 
   const visibleCards = [activeIndex - 1, activeIndex, activeIndex + 1].map(
@@ -74,6 +77,8 @@ const Carousel = ({ categories }) => {
               type="search"
               placeholder="Search..."
               style={{ marginBottom: "16px" }}
+              value={searchValue}
+              onChange={handleInputChange}
             />
           )}
         </CardStyled>

@@ -5,6 +5,9 @@ import Carousel from "../utils/CategorySelectionCarousell";
 import { useState, useEffect } from "react";
 
 function Guidelines() {
+  const [searchValue, setSearchValue] = useState("");
+  const [data, setData] = useState([]);
+
   const categories = [
     {
       type: "Search",
@@ -38,7 +41,6 @@ function Guidelines() {
     },
   ];
 
-  const [data, setData] = useState([]);
   const urls = [
     "https://partyvikings.dorikeczko.com/wp-json/wp/v2/photography?_embed&v=9999",
     "https://partyvikings.dorikeczko.com/wp-json/wp/v2/communication?_embed&v=9999",
@@ -69,7 +71,11 @@ function Guidelines() {
   return (
     <div>
       {/*<BlogFull />*/}
-      <Carousel categories={categories} />
+      <Carousel
+        categories={categories}
+        searchValue={searchValue}
+        setSearchValue={setSearchValue}
+      />
       <BlogCard data={data} />
     </div>
   );
