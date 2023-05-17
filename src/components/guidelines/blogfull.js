@@ -1,33 +1,44 @@
-import React from "react";
-import { useEffect, useState } from "react";
+import { Fragment } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import Iconify from "../utils/Iconify";
+import {
+  IconButton,
+  Card,
+  Grid,
+  CardContent,
+  Typography,
+  Divider,
+} from "@mui/material";
+import { useEffect } from "react";
 
-import { Card, Grid, CardContent, Typography, Divider } from "@mui/material";
-
-function BlogFull() {
-  const [data, setData] = useState([]);
-  const urls = [
-    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/photography?_embed&v=9999",
-    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/communication?_embed&v=9999",
-    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/graphic?_embed&v=9999",
-  ];
+function BlogFull(data) {
+  const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
-    fetch(urls)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    // Scroll to top when navigation occurs
+    window.scrollTo(0, 0);
+  }, [location]);
 
-  if (!Array.isArray(data) || data.length <= 0) {
+  if (Object.values(data).length <= 0) {
     return null;
   }
 
   return (
     <div>
-      {data.map((urls, index) => (
-        <>
+      <IconButton
+        onClick={() => {
+          navigate(-1);
+        }}
+      >
+        <Iconify
+          icon={"material-symbols:arrow-back-rounded"}
+          width={24}
+          height={24}
+        />
+      </IconButton>
+      {Object.values(data).map((urls, index) => (
+        <Fragment key={index}>
           <Card
             sx={{
               display: "flex",
@@ -52,7 +63,7 @@ function BlogFull() {
                 src={urls.acf?.mainimg.url}
                 height={"350vh"}
                 alt={urls.acf?.title}
-              ></img>
+              />
             </CardContent>
             <CardContent
               sx={{
@@ -96,7 +107,7 @@ function BlogFull() {
               __html: `${urls.content.rendered}`,
             }}
           ></div>
-        </>
+        </Fragment>
       ))}
     </div>
   );

@@ -7,6 +7,7 @@ import Chat from "./components/chat/chat";
 import Todo from "./components/todo/todo";
 import Files from "./components/files/files";
 import Accounts from "./components/accounts/accounts";
+import ReadBlog from "./components/readBlog/readBlog";
 import { Route, Routes } from "react-router-dom";
 import { useNavigate, useLocation } from "react-router";
 import { auth } from "./service/authService";
@@ -26,15 +27,26 @@ function App() {
     return unsubscribe;
   }, [navigate]);
 
+  const isRestricted = () => {
+    console.log(currentLocation, "currentLocation");
+    if (currentLocation === "/") {
+      return;
+    } else if (currentLocation === "/signUp") {
+      return;
+    }
+    return <TemporaryDrawer />;
+  };
+
   return (
     <>
-      {currentLocation !== "/signUp" && <TemporaryDrawer />}
+      {isRestricted()}
       <Routes>
         <>
           <Route path="/" element={<SignIn />} />
         </>
 
         <>
+          <Route path="/readblog" element={<ReadBlog />}></Route>
           <Route path="/dashboard" element={<Dashboard />}></Route>
           <Route path="/chat" element={<Chat />}></Route>
           <Route path="/todo" element={<Todo />}></Route>

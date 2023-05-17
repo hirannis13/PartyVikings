@@ -92,7 +92,7 @@ function Guidelines() {
   }, [data, searchValue]);
 
   return (
-    <div>
+    <>
       <Carousel
         categories={categories}
         searchValue={searchValue}
@@ -108,7 +108,7 @@ function Guidelines() {
       ) : (
         <BlogCard data={filteredData} />
       )}
-    </div>
+    </>
   );
 }
 
