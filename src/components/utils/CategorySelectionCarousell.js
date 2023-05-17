@@ -6,8 +6,10 @@ import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const CarouselContainer = styled("div")`
   display: flex;
   align-items: center;
-  margin-bottom: 16px;
+  padding: 7vh 0 8vh 0;
+  margin: 0 0 2vh 0;
   justify-content: center;
+  background-color: #2a403e;
 `;
 
 const CardStyled = styled(Card)(({ active, pictureurl, issearchcard }) => ({
