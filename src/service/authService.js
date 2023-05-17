@@ -28,7 +28,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-export const assignName = (navigate, displayName) => {
+export const assignName = (navigate, displayName, selectedImage) => {
   const unsubscribe = onAuthStateChanged(auth, (authUser) => {
     const user = authUser;
     if (authUser && authUser.uid === user.uid) {
@@ -36,6 +36,8 @@ export const assignName = (navigate, displayName) => {
       setDoc(usersRef, {
         email: user.email,
         name: displayName,
+        imgId: selectedImage.id,
+        imgUrl: selectedImage.imgUrl,
       });
       unsubscribe();
       navigate("/dashboard");
@@ -90,11 +92,13 @@ export const storeTaskInFirestore = async (
     console.error("Error storing task in Firestore: ", error);
   }
 };
+
 export const signUp = (email, password) => {
   return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
+
         resolve(user);
       })
       .catch((error) => {
