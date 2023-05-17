@@ -1,5 +1,6 @@
 import React from "react";
 import BlogCard from "./blogcard";
+import { Divider, Typography } from "@mui/material";
 import Carousel from "../utils/CategorySelectionCarousell";
 import { useState, useEffect } from "react";
 
@@ -99,6 +100,10 @@ function Guidelines() {
         setSearchValue={setSearchValue}
         setSelectedCategory={setSelectedCategory}
       />
+      <Typography variant="h5" sx={{ marginBottom: "5vh" }}>
+        {" "}
+        Blogs <Divider></Divider>
+      </Typography>
       {selectedCategory === "Search" ? (
         searchValue === "" ? (
           <BlogCard data={data} />
