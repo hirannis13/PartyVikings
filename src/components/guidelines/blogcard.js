@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import {
   Card as MuiCard,
   CardContent,
@@ -16,10 +15,7 @@ function BlogCard({ data }) {
   const handleOpenPost = () => {
     //Do something yet unknown
   };
-  console.log(
-    data.map((urls) => urls.acf),
-    "This is titles"
-  );
+
   return (
     <>
       {data.map((urls, index) => (
@@ -28,6 +24,7 @@ function BlogCard({ data }) {
             width: "16vw",
             boxShadow: 4,
           }}
+          key={index}
         >
           <CardMedia
             component="img"

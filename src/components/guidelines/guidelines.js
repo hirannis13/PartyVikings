@@ -1,13 +1,14 @@
 import React from "react";
-import BlogFull from "./blogfull";
 import BlogCard from "./blogcard";
 import Carousel from "../utils/CategorySelectionCarousell";
 import { useState, useEffect } from "react";
 
 function Guidelines() {
   const [searchValue, setSearchValue] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("Search");
+  const [filteredData, setFilteredData] = useState([]);
+  const [searchedData, setSearchedData] = useState("");
   const [data, setData] = useState([]);
-
   const categories = [
     {
       type: "Search",
@@ -59,24 +60,54 @@ function Guidelines() {
           []
         );
         setData(combinedData);
-        console.log(combinedData, "data of stuff");
       } catch (error) {
         console.error(error);
       }
     };
 
     fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  useEffect(() => {
+    if (
+      Array.isArray(data) &&
+      data.length > 0 &&
+      selectedCategory?.toLocaleLowerCase() !== "search"
+    ) {
+      const filteredCards = data.filter(
+        (urls) => urls.acf?.category === selectedCategory?.toLocaleLowerCase()
+      );
+      setFilteredData(filteredCards);
+    }
+  }, [data, selectedCategory]);
+
+  useEffect(() => {
+    if (Array.isArray(data) && data.length > 0) {
+      const filteredCards = data.filter((urls) =>
+        urls.acf?.title.toLowerCase().includes(searchValue.toLowerCase())
+      );
+      setSearchedData(filteredCards);
+    }
+  }, [data, searchValue]);
 
   return (
     <div>
-      {/*<BlogFull />*/}
       <Carousel
         categories={categories}
         searchValue={searchValue}
         setSearchValue={setSearchValue}
+        setSelectedCategory={setSelectedCategory}
       />
-      <BlogCard data={data} />
+      {selectedCategory === "Search" ? (
+        searchValue === "" ? (
+          <BlogCard data={data} />
+        ) : (
+          <BlogCard data={searchedData} />
+        )
+      ) : (
+        <BlogCard data={filteredData} />
+      )}
     </div>
   );
 }

@@ -36,7 +36,6 @@ const TaskList = ({ selectedDate }) => {
         setTasksFetched(true);
         if (fetchedTask.length === 0) {
           setTasksFetched(false);
-          console.log("fetchedTask is empty.");
         }
       })
       .catch((error) => {
