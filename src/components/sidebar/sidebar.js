@@ -44,7 +44,6 @@ export default function TemporaryDrawer() {
         height: "100%",
         backgroundColor: "#2a403e",
       }}
-      role="presentation"
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
