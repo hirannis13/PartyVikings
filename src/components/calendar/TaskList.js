@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { IconButton, Typography } from "@mui/material";
+import { IconButton, Typography, Divider } from "@mui/material";
 import useModal from "../../hooks/useModal";
 import Modal from "../utils/Modal";
 import TaskForm from "./TaskForm";
@@ -11,12 +11,13 @@ import Iconify from "../utils/Iconify";
 const TaskListContainer = styled("div")`
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  height: 50vh;
 `;
 const Tasks = styled("div")`
   display: flex;
   flex-direction: column;
-  margin: 1rem 0 1rem 0;
+  height: 50vh;
 `;
 
 const TaskList = ({ selectedDate }) => {
@@ -46,19 +47,34 @@ const TaskList = ({ selectedDate }) => {
 
   return (
     <>
-      <TaskListContainer>
-        <Typography variant="h6">Tasks for {convertedDate}</Typography>
+      <TaskListContainer sx={{ height: "100%" }}>
+        <Typography variant="h5" sx={{ margin: "1vh 0 3vh 0" }}>
+          Tasks for {convertedDate}
+        </Typography>
         {tasksFetched &&
           tasks.map((task) => (
             <React.Fragment key={task.id}>
               <Tasks>
                 <Typography>{task.startTime}</Typography>
-                <Typography>{task.task}</Typography>
+                <Typography>
+                  {task.task} <Divider></Divider>
+                </Typography>
               </Tasks>
             </React.Fragment>
           ))}
-        {!tasksFetched && <Typography>No tasks yet</Typography>}
-        <IconButton sx={{ border: "ActiveBorder" }} onClick={handleOpenModal}>
+        {!tasksFetched && (
+          <Typography variant="b1" sx={{ fontSize: "2vh" }}>
+            No tasks yet
+          </Typography>
+        )}
+        <IconButton
+          sx={{
+            border: "ActiveBorder",
+            bottom: "0",
+            width: "auto",
+          }}
+          onClick={handleOpenModal}
+        >
           <Iconify icon={"majesticons:plus"}></Iconify>
         </IconButton>
       </TaskListContainer>

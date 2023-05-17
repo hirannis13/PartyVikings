@@ -11,15 +11,16 @@ const CalendarControlContainer = styled("div")`
   justify-content: center;
 `;
 const TaskListContainer = styled(Card)`
-  width: 20vw;
-  border-radius: 20px;
-  height: 35vh;
+  width: 17vw;
+  border-radius: 1vw;
+  height: 50vh;
   display: flex;
   justify-content: center;
+  background: linear-gradient(to bottom, #fff 0%, #fff 10%, #dadedf 100%);
 `;
 
 const MonthYear = styled(Typography)`
-  margin: 8px;
+  margin: 1vh 0;
 `;
 
 const CalendarWithTasksContainer = styled("div")`
@@ -32,11 +33,13 @@ const CalendarWithTasksContainer = styled("div")`
 const CalendarContainer = styled(Card)`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex start;
   flex-direction: column;
-  width: 65%;
+  width: 45%;
   padding: 2rem;
-  border-radius: 20px;
+  border-radius: 1vw;
+  height: 50vh;
+  background: linear-gradient(to bottom, #fff 0%, #fff 10%, #dadedf 100%);
 `;
 
 const ArrowIconLeft = styled(ChevronLeft)`
@@ -51,7 +54,7 @@ const GridContainer = styled("div")`
   grid-template-columns: repeat(7, 1fr);
   row-gap: 1rem;
   column-gap: 4rem;
-  margin-top: 16px;
+  margin-top: 4vh;
 
   .weekdays {
     display: flex;
@@ -68,15 +71,22 @@ const DayCell = styled("div")`
   justify-content: center;
   width: 2rem;
   height: 2rem;
+  padding: 0.5rem;
   cursor: pointer;
 
   &.current-day {
-    background-color: blue;
-    color: white;
-  }
-  &.selected-day {
-    background-color: orange;
+    background-color: lightgrey;
     color: black;
+    border-radius: 50%;
+  }
+
+  &.selected-day {
+    background-color: transparent;
+    color: black;
+    background-color: transparent;
+    color: black;
+    border-radius: 50%;
+    box-shadow: inset 0 0 0 3px green;
   }
 `;
 
@@ -162,10 +172,10 @@ const Calendar = () => {
   };
   return (
     <CalendarWithTasksContainer>
-      <TaskListContainer>
+      <TaskListContainer sx={{ boxShadow: 4, padding: "2vh 0" }}>
         <TaskList selectedDate={selectedDate} />
       </TaskListContainer>
-      <CalendarContainer>
+      <CalendarContainer sx={{ boxShadow: 4 }}>
         <CalendarControlContainer>
           <IconButton onClick={handlePreviousMonth}>
             <ArrowIconLeft />

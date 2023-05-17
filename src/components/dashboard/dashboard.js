@@ -16,6 +16,7 @@ function Dashboard() {
         flexDirection={"column"}
         justifyContent={"center"}
         alignItems={"center"}
+        marginTop={"5vh"}
       >
         <UserWelcome />
         <Grid
@@ -33,7 +34,7 @@ function Dashboard() {
           </Grid>
         </Grid>
       </Grid>
-      <Box>
+      <Box marginTop={"13vh"} marginBottom={"10vh"}>
         <Calendar />
       </Box>
     </>
