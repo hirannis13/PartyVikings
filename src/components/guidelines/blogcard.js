@@ -7,14 +7,17 @@ import {
   Button,
   Grid,
 } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 function BlogCard({ data }) {
+  const navigate = useNavigate();
+
   if (!Array.isArray(data) || data.length <= 0) {
     return null;
   }
 
-  const handleOpenPost = () => {
-    //Do something yet unknown
+  const handleOpenPost = (urls) => {
+    navigate("/readblog", { state: { data: urls } });
   };
 
   return (
@@ -86,7 +89,9 @@ function BlogCard({ data }) {
               </Typography>
               <Button
                 variant="outlined"
-                onClick={handleOpenPost}
+                onClick={() => {
+                  handleOpenPost(urls);
+                }}
                 sx={{
                   color: "#2A403E",
                   border: "#2A403E 0.5px solid",
