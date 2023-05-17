@@ -1,5 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react";
 import {
   Card as MuiCard,
   CardContent,
@@ -8,23 +7,7 @@ import {
   Button,
 } from "@mui/material";
 
-function BlogCard() {
-  const [data, setData] = useState([]);
-  const urls = [
-    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/photography?_embed&v=9999",
-    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/communication?_embed&v=9999",
-    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/graphic?_embed&v=9999",
-  ];
-
-  useEffect(() => {
-    fetch(urls)
-      .then((res) => res.json())
-      .then((data) => {
-        setData(data);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+function BlogCard({ data }) {
   if (!Array.isArray(data) || data.length <= 0) {
     return null;
   }
@@ -41,6 +24,7 @@ function BlogCard() {
             width: "16vw",
             boxShadow: 4,
           }}
+          key={index}
         >
           <CardMedia
             component="img"

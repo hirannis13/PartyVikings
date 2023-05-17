@@ -11,7 +11,7 @@ function Dashboard() {
   return (
     <>
       <Grid
-        contaiener
+        container
         display={"flex"}
         flexDirection={"column"}
         justifyContent={"center"}
