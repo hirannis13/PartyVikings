@@ -8,12 +8,23 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Grid from "@mui/material/Grid";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { signUp, assignName } from "../../service/authService";
 import Iconify from "../../components/utils/Iconify";
 import { IconButton } from "@mui/material";
 import { useState } from "react";
+import { useSnackbar } from "../../components/utils/SnackBarContext";
+import styled from "@emotion/styled";
+import { Fragment } from "react";
+
+const ColorButtonSubmit = styled(Button)`
+  color: var(--white);
+  background-color: var(--green);
+  &:hover {
+    color: var(--yellow);
+    background-color: var(--green);
+  }
+`;
 
 export const imageContainer = [
   { id: 1, imgUrl: `${process.env.PUBLIC_URL}/images/viking1.svg` },
@@ -25,6 +36,7 @@ export const imageContainer = [
 
 export default function SignUp() {
   const navigate = useNavigate();
+  const showSnackbar = useSnackbar();
 
   const [selectedImage, setSelectedImage] = useState(null);
   const [name, setName] = useState("");
@@ -84,18 +96,21 @@ export default function SignUp() {
     if (isNameValid && isEmailValid && isPasswordValid) {
       const data = new FormData(event.currentTarget);
       try {
-        await signUp(data.get("email"), data.get("password"));
-        assignName(navigate, data.get("name"), selectedImage);
-
-        console.log("User signed up and name assigned successfully");
+        await signUp(data.get("email"), data.get("password"), showSnackbar);
+        assignName(navigate, data.get("name"), selectedImage, showSnackbar);
       } catch (error) {
-        console.log("Error signing up or assigning name", error);
+        showSnackbar(
+          "Error signing up or assigning name",
+          3000,
+          "var(--yellow)",
+          "black"
+        );
       }
     }
   };
 
   return (
-    <>
+    <Fragment>
       {" "}
       <IconButton
         onClick={() => {
@@ -193,17 +208,12 @@ export default function SignUp() {
                 </Grid>
               ))}
             </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-            >
+            <ColorButtonSubmit fullWidth type="submit" sx={{ mt: 3, mb: 2 }}>
               Sign Up
-            </Button>
+            </ColorButtonSubmit>
           </Box>
         </Box>
       </Container>
-    </>
+    </Fragment>
   );
 }

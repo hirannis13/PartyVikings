@@ -12,6 +12,7 @@ import useModal from "../../hooks/useModal";
 import styled from "@emotion/styled";
 import { storeTaskInFirestore } from "../../service/authService";
 import convertSelectedDay from "../utils/DateConversion";
+import { useSnackbar } from "../utils/SnackBarContext";
 
 const StyledForm = styled("form")``;
 
@@ -39,6 +40,7 @@ const TaskForm = ({ selectedDay }) => {
   const [startTime, setStartTime] = useState("");
   const [task, setTask] = useState("");
   const { updateModalState } = useModal();
+  const showSnackbar = useSnackbar();
 
   const generateTimeOptions = () => {
     const timeOptions = [];
@@ -71,7 +73,12 @@ const TaskForm = ({ selectedDay }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     // Perform form submission logic here
-    storeTaskInFirestore(convertSelectedDay(selectedDay), startTime, task);
+    storeTaskInFirestore(
+      convertSelectedDay(selectedDay),
+      startTime,
+      task,
+      showSnackbar
+    );
     // Reset form fields
     setStartTime("");
     setTask("");

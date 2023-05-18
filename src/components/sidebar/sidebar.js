@@ -13,16 +13,18 @@ import { logOut } from "../../service/authService";
 import { useNavigate } from "react-router-dom";
 import Image from "mui-image";
 import Iconify from "../utils/Iconify";
+import { useSnackbar } from "../utils/SnackBarContext";
 
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
     left: false,
   });
+  const showSnackbar = useSnackbar();
 
   const navigate = useNavigate();
 
   const logOutHandler = () => {
-    logOut(navigate);
+    logOut(navigate, showSnackbar);
   };
 
   const toggleDrawer = (anchor, open) => (event) => {

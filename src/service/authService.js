@@ -50,22 +50,42 @@ export const editUser = (displayName, selectedImage, showSnackbar) => {
               })
               .catch((updateError) => {
                 // Handle update error here
-                console.error("Failed to update document:", updateError);
+                showSnackbar(
+                  "Failed to update document",
+                  3000,
+                  "var(--yellow)",
+                  "black"
+                );
               });
           } else {
             // Handle document not found error here
-            console.error("Document does not exist.");
+            showSnackbar(
+              "Document does not exist",
+              3000,
+              "var(--yellow)",
+              "black"
+            );
           }
         })
         .catch((getError) => {
           // Handle get document error here
-          console.error("Failed to get document:", getError);
+          showSnackbar(
+            "Failed to get document",
+            3000,
+            "var(--yellow)",
+            "black"
+          );
         });
     }
   });
 };
 
-export const assignName = (navigate, displayName, selectedImage) => {
+export const assignName = (
+  navigate,
+  displayName,
+  selectedImage,
+  showSnackbar
+) => {
   const unsubscribe = onAuthStateChanged(auth, (authUser) => {
     const user = authUser;
     if (authUser && authUser.uid === user.uid) {
@@ -75,14 +95,21 @@ export const assignName = (navigate, displayName, selectedImage) => {
         name: displayName,
         imgId: selectedImage.id,
         imgUrl: selectedImage.imgUrl,
+      }).then(() => {
+        showSnackbar(
+          "User signed up and name assigned successfully",
+          3000,
+          "var(--green)",
+          "white"
+        );
+        unsubscribe();
+        navigate("/dashboard");
       });
-      unsubscribe();
-      navigate("/dashboard");
     }
   });
 };
 
-export const fetchTasksFromFirestore = async (selectedDay) => {
+export const fetchTasksFromFirestore = async (selectedDay, showSnackbar) => {
   try {
     const todosRef = collection(db, "todos");
     const dateRef = doc(todosRef, selectedDay);
@@ -98,7 +125,12 @@ export const fetchTasksFromFirestore = async (selectedDay) => {
 
     return tasks;
   } catch (error) {
-    console.error("Error fetching tasks from Firestore:", error);
+    showSnackbar(
+      "Error fetching tasks from Firestore",
+      3000,
+      "var(--yellow)",
+      "black"
+    );
     return [];
   }
 };
@@ -106,7 +138,8 @@ export const fetchTasksFromFirestore = async (selectedDay) => {
 export const storeTaskInFirestore = async (
   selectedDayConverted,
   startTime,
-  task
+  task,
+  showSnackbar
 ) => {
   try {
     const todosRef = collection(db, "todos");
@@ -124,30 +157,37 @@ export const storeTaskInFirestore = async (
     const newTaskRef = doc(tasksRef, taskCount.toString());
     await setDoc(newTaskRef, data);
 
-    console.log("Task stored in Firestore successfully!");
+    showSnackbar(
+      "Task stored in Firestore successfully!",
+      3000,
+      "var(--green)",
+      "white"
+    );
   } catch (error) {
-    console.error("Error storing task in Firestore: ", error);
+    showSnackbar(
+      "Error storing task in Firestore",
+      3000,
+      "var(--yellow)",
+      "black"
+    );
   }
 };
 
-export const signUp = (email, password) => {
+export const signUp = (email, password, showSnackbar) => {
   return new Promise((resolve, reject) => {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-
         resolve(user);
       })
       .catch((error) => {
-        const errorCode = error.code;
         const errorMessage = error.message;
-        console.log(errorCode, errorMessage);
-        reject(error);
+        showSnackbar(errorMessage, 3000, "var(--yellow)", "black");
       });
   });
 };
 
-export const signIn = (navigate, email, password) => {
+export const signIn = (navigate, email, password, showSnackbar) => {
   signInWithEmailAndPassword(auth, email, password)
     .then((userCredential) => {
       // Signed in
@@ -156,17 +196,19 @@ export const signIn = (navigate, email, password) => {
       navigate("/dashboard");
     })
     .catch((error) => {
-      alert(error.code);
+      const errorMessage = error.message;
+      showSnackbar(errorMessage, 3000, "var(--yellow)", "black");
     });
 };
 
-export const logOut = (navigate) => {
+export const logOut = (navigate, showSnackbar) => {
   signOut(auth)
     .then(() => {
       navigate("/");
     })
     .catch((error) => {
-      alert(error.code);
+      const errorMessage = error.code;
+      showSnackbar(errorMessage, 3000, "var(--yellow)", "black");
     });
 };
 
