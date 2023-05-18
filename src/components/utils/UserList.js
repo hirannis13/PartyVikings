@@ -127,7 +127,12 @@ const UserList = () => {
                   </Grid>
                   {currentUser === user.email ? (
                     <IconButton
-                      sx={{ marginLeft: "auto" }}
+                      sx={{
+                        marginLeft: "auto",
+                        "&:hover": {
+                          color: "var(--yellow)",
+                        },
+                      }}
                       onClick={summonEditUserModal}
                     >
                       <Iconify
@@ -160,6 +165,7 @@ const UserList = () => {
           onClick={() => {
             navigate("/signUp");
           }}
+          disableRipple
         >
           <Iconify
             icon={"material-symbols:add-circle-rounded"}
@@ -167,8 +173,11 @@ const UserList = () => {
             height={48}
             sx={{
               color: "black",
-              backgroundColor: "white",
+              backgroundColor: "var(--white)",
               borderRadius: "100%",
+              "&:hover": {
+                color: "var(--yellow)",
+              },
             }}
           />
         </IconButton>

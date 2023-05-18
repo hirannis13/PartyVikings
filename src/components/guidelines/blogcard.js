@@ -6,8 +6,24 @@ import {
   Typography,
   Button,
   Grid,
+  CardActions,
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import styled from "@emotion/styled";
+
+const TwoLineText = styled(Typography)`
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  font-size: 0.9rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  hyphens: auto;
+  white-space: wrap;
+  margin: 1.5vh 0 4vh 0;
+  hyphens: auto;
+`;
 
 function BlogCard({ data }) {
   const navigate = useNavigate();
@@ -23,7 +39,7 @@ function BlogCard({ data }) {
   return (
     <Grid
       container
-      spacing={{ xs: 2, md: 3 }}
+      spacing={{ xs: 2, md: 7 }}
       columns={{ xs: 4, sm: 8, md: 12 }}
     >
       {data.map((urls, index) => (
@@ -31,7 +47,7 @@ function BlogCard({ data }) {
           item
           xs={2}
           sm={4}
-          md={4}
+          md={3}
           sx={{
             display: "flex",
             justifyContent: "center",
@@ -43,50 +59,38 @@ function BlogCard({ data }) {
             sx={{
               width: "16vw",
               boxShadow: 4,
+              height: "40vh",
+              display: "flex",
+              flexDirection: "column",
             }}
             key={index}
           >
             <CardMedia
               component="img"
-              height="250vh"
               image={urls.acf?.mainimg.url}
               alt={urls.acf?.category}
+              height={"40%"}
             />
-            <CardContent
-              sx={{
-                display: "flex",
-                alignContent: "center",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <CardContent sx={{ height: "12vh" }}>
               <Typography
                 gutterBottom
-                variant="h4"
                 component="div"
-                sx={{ textAlign: "center", fontSize: "1.8rem" }}
+                sx={{ textAlign: "center", fontSize: "1.3rem" }}
               >
                 {urls.acf?.title}
               </Typography>
-              <Typography
-                variant="h6"
-                color="text.secondary"
-                sx={{
-                  margin: "1.5vh 0 4vh 0",
-                  display: "flex",
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  lineClamp: 3,
-                  boxOrient: "vertical",
-                  wordBreak: "break-word",
-                  hyphens: "auto",
-                  whiteSpace: "nowrap",
-                  width: "100%",
-                }}
-              >
-                oohelooohelolheloohellohelloheloohelooohelolheloohellohelloheloohelooohelolheloo
-              </Typography>
+              <TwoLineText variant="h6" color="text.secondary">
+                oohelooohel olheloo hellohellohel oohelooohelo lheloohellohell
+                oheloohelooohelolheloo
+              </TwoLineText>
+            </CardContent>
+            <CardActions
+              sx={{
+                justifyContent: "center",
+                marginTop: "auto",
+                paddingBottom: "1rem",
+              }}
+            >
               <Button
                 variant="outlined"
                 onClick={() => {
@@ -106,7 +110,7 @@ function BlogCard({ data }) {
               >
                 Read more
               </Button>
-            </CardContent>
+            </CardActions>
           </MuiCard>
         </Grid>
       ))}

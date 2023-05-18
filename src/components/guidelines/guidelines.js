@@ -100,10 +100,12 @@ function Guidelines() {
         setSearchValue={setSearchValue}
         setSelectedCategory={setSelectedCategory}
       />
-      <Typography variant="h5" sx={{ marginBottom: "5vh" }}>
+      <Typography variant="h5" sx={{ marginLeft: "5rem" }}>
         {" "}
-        Blogs <Divider></Divider>
+        Blogs
       </Typography>
+      <Divider sx={{ marginBottom: "5vh" }} />
+
       {selectedCategory === "Search" ? (
         searchValue === "" ? (
           <BlogCard data={data} />
@@ -113,6 +115,14 @@ function Guidelines() {
       ) : (
         <BlogCard data={filteredData} />
       )}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          width: "90%",
+          marginBottom: "5vh",
+        }}
+      ></div>
     </>
   );
 }
