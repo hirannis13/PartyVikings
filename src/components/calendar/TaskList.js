@@ -111,8 +111,19 @@ const TaskList = ({ selectedDate }) => {
             width: "auto",
           }}
           onClick={handleOpenModal}
+          disableRipple
         >
-          <Iconify icon={"majesticons:plus"}></Iconify>
+          <Iconify
+            icon={"material-symbols:add-circle-rounded"}
+            width={48}
+            height={48}
+            sx={{
+              color: "black",
+              "&:hover": {
+                color: "var(--yellow)",
+              },
+            }}
+          />
         </IconButton>
       </TaskListContainer>
       {openModal && (

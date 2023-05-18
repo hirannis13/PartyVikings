@@ -129,7 +129,12 @@ const UserList = () => {
                   </Grid>
                   {currentUser === user.email ? (
                     <IconButton
-                      sx={{ marginLeft: "auto" }}
+                      sx={{
+                        marginLeft: "auto",
+                        "&:hover": {
+                          color: "var(--yellow)",
+                        },
+                      }}
                       onClick={summonEditUserModal}
                     >
                       <Iconify
@@ -169,9 +174,12 @@ const UserList = () => {
             width={48}
             height={48}
             sx={{
+              backgroundColor: "var(--white)",
               color: "var(--green)",
-              backgroundColor: "white",
               borderRadius: "100%",
+              "&:hover": {
+                color: "var(--yellow)",
+              },
             }}
           />
         </IconButton>
