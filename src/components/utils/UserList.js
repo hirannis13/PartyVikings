@@ -119,11 +119,13 @@ const UserList = () => {
                     <Typography
                       variant="subtitle1"
                       gutterBottom
-                      sx={{ fontWeight: "bold" }}
+                      sx={{ fontWeight: "bold", color: "var(--mtext)" }}
                     >
                       {user.name}
                     </Typography>
-                    <Typography variant="body2">{user.email}</Typography>
+                    <Typography variant="body2" sx={{ color: "var(--stext)" }}>
+                      {user.email}
+                    </Typography>
                   </Grid>
                   {currentUser === user.email ? (
                     <IconButton
@@ -161,19 +163,19 @@ const UserList = () => {
           <p>No users found.</p>
         )}
         <IconButton
+          disableRipple
           sx={{ transform: "translate(0, -2rem)" }}
           onClick={() => {
             navigate("/signUp");
           }}
-          disableRipple
         >
           <Iconify
             icon={"material-symbols:add-circle-rounded"}
             width={48}
             height={48}
             sx={{
-              color: "black",
               backgroundColor: "var(--white)",
+              color: "var(--green)",
               borderRadius: "100%",
               "&:hover": {
                 color: "var(--yellow)",

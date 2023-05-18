@@ -6,7 +6,7 @@ import { ArrowBack, ArrowForward } from "@mui/icons-material";
 const CarouselContainer = styled("div")`
   display: flex;
   align-items: center;
-  padding: 7vh 0 8vh 0;
+  padding: 6vh 0 8vh 0;
   margin: 0 0 2vh 0;
   justify-content: center;
   background-color: #2a403e;
@@ -79,7 +79,7 @@ const Carousel = ({
   return (
     <CarouselContainer>
       <IconButton onClick={handlePrev}>
-        <ArrowBack />
+        <ArrowBack sx={{ color: "white" }} />
       </IconButton>
       {visibleCards.map((category, index) => (
         <CardStyled
@@ -110,7 +110,7 @@ const Carousel = ({
         </CardStyled>
       ))}
       <IconButton onClick={handleNext}>
-        <ArrowForward />
+        <ArrowForward sx={{ color: "white" }} />
       </IconButton>
     </CarouselContainer>
   );

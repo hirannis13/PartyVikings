@@ -59,18 +59,27 @@ const TiktokComponent = () => {
             paddingX: "2vh",
           }}
         >
-          <Typography variant="h5">TikTok</Typography>
+          <Typography variant="h5" sx={{ color: "var(--mtext)" }}>
+            TikTok
+          </Typography>
           <Typography
             variant="h6"
             fontSize={"1rem"}
             sx={{
               padding: "0 0 1vh 0",
+              color: "var(--stext)",
             }}
           >
             {currentDay}
           </Typography>
-          <Typography variant="h6"> {findCurrentDay?.timeone}</Typography>
-          <Typography variant="h6"> {findCurrentDay?.timetwo}</Typography>
+          <Typography variant="h6" sx={{ color: "var(--mtext)" }}>
+            {" "}
+            {findCurrentDay?.timeone}
+          </Typography>
+          <Typography variant="h6" sx={{ color: "var(--mtext)" }}>
+            {" "}
+            {findCurrentDay?.timetwo}
+          </Typography>
         </Box>
       </Card>
     </>

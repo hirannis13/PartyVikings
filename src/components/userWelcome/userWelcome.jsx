@@ -42,6 +42,7 @@ const UserWelcome = () => {
         alignItems: "center",
         borderRadius: "1.7rem",
         boxShadow: 4,
+        overflow: "hidden",
       }}
     >
       <CardContent
@@ -55,7 +56,10 @@ const UserWelcome = () => {
           left: "0",
         }}
       >
-        <Typography variant="h3" sx={{ fontSize: "2rem" }}>
+        <Typography
+          variant="h3"
+          sx={{ fontSize: "2rem", color: "var(--mtext)" }}
+        >
           {user ? `Hello, ${user.name}` : "Not logged in"}
         </Typography>
       </CardContent>

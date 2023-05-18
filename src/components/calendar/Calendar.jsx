@@ -12,8 +12,8 @@ const CalendarControlContainer = styled("div")`
 `;
 const TaskListContainer = styled(Card)`
   width: 17vw;
-  border-radius: 1.7rem;
-  height: 50vh;
+  border-radius: 1.7rem 0rem 0rem 1.7rem;
+  max-height: 50vh;
   display: flex;
   justify-content: center;
   background: linear-gradient(to bottom, #6b8d8a 0%, var(--green) 100%);
@@ -33,12 +33,12 @@ const CalendarWithTasksContainer = styled("div")`
 const CalendarContainer = styled(Card)`
   display: flex;
   align-items: center;
-  justify-content: flex start;
+  justify-content: flex-start;
   flex-direction: column;
   width: 48%;
   padding: 2rem;
   border-radius: 1.7rem;
-  height: 50vh;
+  height: 53vh;
   background-color: white;
 `;
 
@@ -61,7 +61,9 @@ const GridContainer = styled("div")`
     align-items: center;
     justify-content: center;
     height: 2rem;
-    font-weight: bold;
+    font-weight: 0;
+    font-size: 1.2rem;
+    color: var(--stext);
   }
 `;
 
@@ -75,18 +77,18 @@ const DayCell = styled("div")`
   cursor: pointer;
 
   &.current-day {
-    background-color: lightgrey;
-    color: black;
+    background-color: var(--highlight);
+    color: var(--mtext);
     border-radius: 50%;
   }
 
   &.selected-day {
     background-color: transparent;
-    color: black;
+    color: var(--mtext);
     background-color: transparent;
     color: black;
     border-radius: 50%;
-    box-shadow: inset 0 0 0 3px var(--green);
+    box-shadow: inset 0 0 0 1px var(--yellow);
   }
 `;
 
@@ -178,16 +180,19 @@ const Calendar = () => {
       <CalendarContainer sx={{ boxShadow: 4 }}>
         <CalendarControlContainer>
           <IconButton onClick={handlePreviousMonth}>
-            <ArrowIconLeft />
+            <ArrowIconLeft sx={{ color: "var(--mtext)" }} />
           </IconButton>
-          <MonthYear sx={{ width: "20vw", textAlign: "center" }} variant="h5">
+          <MonthYear
+            sx={{ width: "20vw", textAlign: "center", color: "var(--mtext)" }}
+            variant="h5"
+          >
             {selectedDate.toLocaleString("default", {
               month: "long",
               year: "numeric",
             })}
           </MonthYear>
           <IconButton onClick={handleNextMonth}>
-            <ArrowIconRight />
+            <ArrowIconRight sx={{ color: "var(--mtext)" }} />
           </IconButton>
         </CalendarControlContainer>
         <GridContainer>{renderCalendarDays()}</GridContainer>
