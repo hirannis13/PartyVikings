@@ -44,6 +44,7 @@ function BlogCard({ data }) {
     >
       {data.map((urls, index) => (
         <Grid
+          key={index}
           item
           xs={2}
           sm={4}

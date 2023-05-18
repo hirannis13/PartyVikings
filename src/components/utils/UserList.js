@@ -38,7 +38,7 @@ const UserList = () => {
 
     // Clean up the subscription when the component unmounts
     return () => unsubscribe();
-  }, []);
+  }, [openModal]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -56,7 +56,7 @@ const UserList = () => {
       }
     };
     fetchUsers();
-  }, []);
+  }, [openModal]);
 
   const CustomPerson = ({ imageUrl }) => (
     <div>

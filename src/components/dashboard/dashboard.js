@@ -8,6 +8,12 @@ import Calendar from "../calendar/Calendar";
 import InstagramComponent from "../socialcheck/instagram";
 
 function Dashboard() {
+  // const showSnackbar = useSnackbar();
+
+  // const handleAction = () => {
+  //   showSnackbar("Action completed!", 3000, "green", "white");
+  // };
+
   return (
     <div>
       <Grid

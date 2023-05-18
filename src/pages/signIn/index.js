@@ -9,7 +9,6 @@ import Paper from "@mui/material/Paper";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import * as React from "react";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { signIn } from "../../service/authService";

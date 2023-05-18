@@ -15,6 +15,26 @@ import convertSelectedDay from "../utils/DateConversion";
 
 const StyledForm = styled("form")``;
 
+const ColorButtonSubmit = styled(Button)`
+  color: var(--white);
+  background-color: var(--green);
+  &:hover {
+    color: var(--yellow);
+    background-color: var(--green);
+  }
+`;
+
+const ColorButtonCancel = styled(Button)`
+  color: var(--green);
+  border-style: solid;
+  border-color: var(--green);
+  border-width: 1px;
+  &:hover {
+    color: var(--yellow);
+    background-color: var(--green);
+  }
+`;
+
 const TaskForm = ({ selectedDay }) => {
   const [startTime, setStartTime] = useState("");
   const [task, setTask] = useState("");
@@ -91,24 +111,19 @@ const TaskForm = ({ selectedDay }) => {
           inputProps={{ maxLength: 200 }}
         />
       </Box>
-      <Box sx={{ justifyContent: "space-between", display: "flex" }}>
-        <Button
-          type="submit"
-          variant="contained"
-          color="primary"
-          sx={{ width: "20%", marginTop: "5%" }}
-        >
+      <Box
+        sx={{
+          justifyContent: "space-between",
+          display: "flex",
+          marginTop: "5%",
+        }}
+      >
+        <ColorButtonSubmit type="submit" sx={{ width: "20%" }}>
           Submit
-        </Button>
-        <Button
-          className={"cancel-btn"}
-          variant="outlined"
-          size="medium"
-          sx={{ width: "20%", marginTop: "5%" }}
-          onClick={handleCloseModal}
-        >
+        </ColorButtonSubmit>
+        <ColorButtonCancel sx={{ width: "20%" }} onClick={handleCloseModal}>
           Cancel
-        </Button>
+        </ColorButtonCancel>
       </Box>
     </StyledForm>
   );

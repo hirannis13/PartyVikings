@@ -31,7 +31,7 @@ onAuthStateChanged(auth, (user) => {
   }
 });
 
-export const editUser = (displayName, selectedImage) => {
+export const editUser = (displayName, selectedImage, showSnackbar) => {
   const unsubscribe = onAuthStateChanged(auth, (authUser) => {
     const user = authUser;
     if (authUser && authUser.uid === user.uid) {
@@ -45,6 +45,7 @@ export const editUser = (displayName, selectedImage) => {
               imgUrl: selectedImage.imgUrl,
             })
               .then(() => {
+                showSnackbar("Edit successful!", 3000, "var(--green)", "white");
                 unsubscribe();
               })
               .catch((updateError) => {

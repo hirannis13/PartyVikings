@@ -86,6 +86,7 @@ export default function SignUp() {
       try {
         await signUp(data.get("email"), data.get("password"));
         assignName(navigate, data.get("name"), selectedImage);
+
         console.log("User signed up and name assigned successfully");
       } catch (error) {
         console.log("Error signing up or assigning name", error);

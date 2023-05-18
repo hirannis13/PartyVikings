@@ -175,7 +175,7 @@ export default function TemporaryDrawer() {
               sx={{
                 width: "2vw",
                 height: "2vw",
-                color: "var(--green)",
+                color: "var(--grey)",
               }}
             />
           </IconButton>
