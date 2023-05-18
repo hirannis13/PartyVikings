@@ -7,6 +7,10 @@ html {
   background-color: var(--white);
 }
 
+#root {
+  background-color: var(--white);
+}
+
 :root {
   --green: #2a403e;
   --white: #f9fafb;

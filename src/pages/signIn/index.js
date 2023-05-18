@@ -13,11 +13,13 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { signIn } from "../../service/authService";
 import { auth } from "../../service/authService";
+import { useSnackbar } from "../../components/utils/SnackBarContext";
 
 const theme = createTheme();
 
 export default function SignIn() {
   let navigate = useNavigate();
+  const showSnackbar = useSnackbar();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -33,7 +35,7 @@ export default function SignIn() {
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
 
-    signIn(navigate, data.get("email"), data.get("password"));
+    signIn(navigate, data.get("email"), data.get("password"), showSnackbar);
   };
 
   return (

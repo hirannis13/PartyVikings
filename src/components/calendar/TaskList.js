@@ -6,6 +6,7 @@ import TaskForm from "./TaskForm";
 import convertSelectedDay from "../utils/DateConversion";
 import { fetchTasksFromFirestore } from "../../service/authService";
 import styled from "@emotion/styled";
+import { useSnackbar } from "../utils/SnackBarContext";
 
 const TaskListContainer = styled("div")`
   display: flex;
@@ -37,12 +38,13 @@ const TaskList = ({ selectedDate }) => {
   const { openModal } = useModal();
   const [tasks, setTasks] = useState({});
   const [tasksFetched, setTasksFetched] = useState(false);
+  const showSnackbar = useSnackbar();
 
   const selectedDay = selectedDate.toLocaleDateString();
   let convertedDate = convertSelectedDay(selectedDay);
 
   useEffect(() => {
-    fetchTasksFromFirestore(convertedDate)
+    fetchTasksFromFirestore(convertedDate, showSnackbar)
       .then((fetchedTask) => {
         setTasks(fetchedTask);
         setTasksFetched(true);
@@ -54,6 +56,7 @@ const TaskList = ({ selectedDate }) => {
         console.error("Error fetching task:", error);
       });
     setTasksFetched(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [convertedDate]);
 
   return (
