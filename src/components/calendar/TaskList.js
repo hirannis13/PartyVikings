@@ -18,6 +18,7 @@ const TaskListContainer = styled("div")`
 const Tasks = styled("div")`
   display: flex;
   flex-direction: column;
+  margin: 1vh 0 0 0;
 `;
 
 const TwoLineText = styled(Typography)`
@@ -31,7 +32,7 @@ const TwoLineText = styled(Typography)`
   hyphens: auto;
   white-space: wrap;
   hyphens: auto;
-  margin: 1vh 0.5vw 1vh 0.5vw;
+  margin: 1vh 0.5vw 1vh 1vw;
 `;
 
 const TaskList = ({ selectedDate }) => {
@@ -83,7 +84,7 @@ const TaskList = ({ selectedDate }) => {
                     color: "var(--yellow)",
                     fontSize: "1.2rem",
                     fontWeight: "0",
-                    margin: "0.5vh 0 0.5vh 0.2vw",
+                    margin: "0.5vh 0 0.5vh 0.5vw",
                   }}
                 >
                   {task.startTime}

@@ -14,8 +14,18 @@ import { useEffect } from "react";
 import { signIn } from "../../service/authService";
 import { auth } from "../../service/authService";
 import { useSnackbar } from "../../components/utils/SnackBarContext";
+import styled from "@emotion/styled";
 
 const theme = createTheme();
+
+const ColorButtonSubmit = styled(Button)`
+  color: var(--white);
+  background-color: var(--green);
+  &:hover {
+    color: var(--yellow);
+    background-color: var(--green);
+  }
+`;
 
 export default function SignIn() {
   let navigate = useNavigate();
@@ -100,14 +110,14 @@ export default function SignIn() {
                 id="password"
                 autoComplete="current-password"
               />
-              <Button
+              <ColorButtonSubmit
                 type="submit"
                 fullWidth
                 variant="contained"
                 sx={{ mt: 3, mb: 2 }}
               >
                 Sign In
-              </Button>
+              </ColorButtonSubmit>
               <Grid container>
                 <Grid item xs>
                   <Link href="#" variant="body2">
