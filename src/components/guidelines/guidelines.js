@@ -100,7 +100,7 @@ function Guidelines() {
         setSearchValue={setSearchValue}
         setSelectedCategory={setSelectedCategory}
       />
-      <Typography variant="h5" sx={{ marginLeft: "5rem" }}>
+      <Typography variant="h5" sx={{ marginLeft: "5rem", marginTop: "5rem" }}>
         {" "}
         Blogs
       </Typography>
