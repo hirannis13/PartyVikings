@@ -18,7 +18,7 @@ const CardStyled = styled(Card)(({ active, pictureurl, issearchcard }) => ({
   margin: "0 8px",
   height: active === "true" ? "20vh" : "15vh",
   backgroundColor: active === "true" ? "#3f51b5" : "#eee",
-  color: active === "true" ? "#f11" : "inherit",
+  color: active === "true" ? "#000" : "inherit",
   backgroundImage: `url(${pictureurl})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
@@ -100,6 +100,7 @@ const Carousel = ({
           </CardContent>
           {category.type === "Search" && (
             <Input
+              sx={{ backgroundColor: "whitesmoke" }}
               type="search"
               placeholder="Search..."
               style={{ marginBottom: "16px" }}

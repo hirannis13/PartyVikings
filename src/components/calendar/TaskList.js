@@ -1,32 +1,42 @@
 import React, { useEffect, useState } from "react";
-import { IconButton, Typography, Divider } from "@mui/material";
+import { Typography, Divider } from "@mui/material";
 import useModal from "../../hooks/useModal";
 import Modal from "../utils/Modal";
 import TaskForm from "./TaskForm";
 import convertSelectedDay from "../utils/DateConversion";
 import { fetchTasksFromFirestore } from "../../service/authService";
 import styled from "@emotion/styled";
-import Iconify from "../utils/Iconify";
 
 const TaskListContainer = styled("div")`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   height: 50vh;
+  width: 100%;
 `;
 const Tasks = styled("div")`
   display: flex;
   flex-direction: column;
 `;
 
+const TwoLineText = styled(Typography)`
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 4;
+  font-size: 0.9rem;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  word-break: break-word;
+  hyphens: auto;
+  white-space: wrap;
+  hyphens: auto;
+  margin: 1vh 0.5vw 1vh 0.5vw;
+`;
+
 const TaskList = ({ selectedDate }) => {
-  const { openModal, updateModalState } = useModal();
+  const { openModal } = useModal();
   const [tasks, setTasks] = useState({});
   const [tasksFetched, setTasksFetched] = useState(false);
-
-  const handleOpenModal = () => {
-    updateModalState(true);
-  };
 
   const selectedDay = selectedDate.toLocaleDateString();
   let convertedDate = convertSelectedDay(selectedDay);
@@ -55,6 +65,7 @@ const TaskList = ({ selectedDate }) => {
             margin: "1vh 0 3vh 0",
             color: "var(--white)",
             fontWeight: "light",
+            textAlign: "center",
           }}
         >
           To do for {selectedDay}
@@ -69,12 +80,12 @@ const TaskList = ({ selectedDate }) => {
                     color: "var(--yellow)",
                     fontSize: "1.2rem",
                     fontWeight: "0",
-                    marginBottom: "1vh",
+                    margin: "0.5vh 0 0.5vh 0.2vw",
                   }}
                 >
                   {task.startTime}
                 </Typography>
-                <Typography
+                <TwoLineText
                   variant="h3"
                   sx={{
                     color: "var(--white)",
@@ -83,12 +94,12 @@ const TaskList = ({ selectedDate }) => {
                   }}
                 >
                   {task.task}{" "}
-                  <Divider
-                    sx={{
-                      borderColor: "var(--grey)",
-                    }}
-                  ></Divider>
-                </Typography>
+                </TwoLineText>
+                <Divider
+                  sx={{
+                    borderColor: "var(--grey)",
+                  }}
+                />
               </Tasks>
             </React.Fragment>
           ))}
@@ -99,33 +110,16 @@ const TaskList = ({ selectedDate }) => {
               color: "var(--white)",
               fontSize: "1.2rem",
               fontWeight: "0",
+              marginTop: "auto",
+              marginBottom: "auto",
+              textAlign: "center",
             }}
           >
             No tasks yet
           </Typography>
         )}
-        <IconButton
-          sx={{
-            border: "ActiveBorder",
-            bottom: "0",
-            width: "auto",
-          }}
-          onClick={handleOpenModal}
-          disableRipple
-        >
-          <Iconify
-            icon={"material-symbols:add-circle-rounded"}
-            width={48}
-            height={48}
-            sx={{
-              color: "black",
-              "&:hover": {
-                color: "var(--yellow)",
-              },
-            }}
-          />
-        </IconButton>
       </TaskListContainer>
+
       {openModal && (
         <Modal
           title={"Add a To-Do task"}

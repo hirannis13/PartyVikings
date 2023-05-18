@@ -8,8 +8,14 @@ import {
   CardContent,
   Typography,
   Divider,
+  CardMedia,
 } from "@mui/material";
 import { useEffect } from "react";
+import styled from "@emotion/styled";
+
+const RenderedContent = styled("div")`
+  margin: 10vh 10vw 0 10vw;
+`;
 
 function BlogFull(data) {
   const navigate = useNavigate();
@@ -39,74 +45,86 @@ function BlogFull(data) {
       </IconButton>
       {Object.values(data).map((urls, index) => (
         <Fragment key={index}>
-          <Card
+          <Grid
             sx={{
+              flexDirection: "column",
               display: "flex",
-              flexDirection: "row",
-              justifyContent: "center",
               alignItems: "center",
-              padding: "0",
-              width: "80vw",
-              height: "40vh",
-              boxShadow: 4,
-              borderRadius: "1vw",
             }}
           >
-            <CardContent
+            <Card
               sx={{
-                width: "40%",
-                paddingLeft: "5%",
-                paddingRight: "3%",
-              }}
-            >
-              <img
-                src={urls.acf?.mainimg.url}
-                height={"350vh"}
-                alt={urls.acf?.title}
-              />
-            </CardContent>
-            <CardContent
-              sx={{
-                width: "40%",
-                paddingRight: "5%",
-                paddingLeft: "3%",
                 display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "left",
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                padding: "0",
+                width: "80vw",
+                height: "40vh",
+                boxShadow: 4,
+                borderRadius: "1vw",
               }}
             >
-              <Typography variant="h6">{urls.acf?.category}</Typography>
-              <Typography variant="h3" sx={{ margin: "2vh 0 6vh 0" }}>
-                {urls.acf?.title}
-              </Typography>
-              <Grid
+              <CardMedia
                 sx={{
-                  display: "flex",
-                  justifyContent: "space-between",
+                  height: "100%",
+                  transformOrigin: "center",
+                  transform: "scale(1)",
+                }}
+                component="img"
+                image={urls.acf?.mainimg.url}
+                title={urls.acf?.title}
+              ></CardMedia>
+              <CardContent
+                sx={{
                   width: "40%",
+                  paddingRight: "5%",
+                  paddingLeft: "3%",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "left",
                 }}
               >
-                <Typography variant="h5">{urls.acf?.date}</Typography>
-                <Divider
-                  orientation="vertical"
-                  role="presentation"
-                  flexItem
+                <Typography variant="h6">{urls.acf?.category}</Typography>
+                <Typography variant="h3" sx={{ margin: "2vh 0 6vh 0" }}>
+                  {urls.acf?.title}
+                </Typography>
+                <Grid
                   sx={{
-                    borderRightWidth: "2px",
-                    borderColor: "#48494B",
-                    borderRadius: "5px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    width: "30vw",
                   }}
-                ></Divider>
-                <Typography variant="h5">{urls.acf?.readtime}</Typography>
-              </Grid>
-            </CardContent>
-          </Card>
-          <div
-            dangerouslySetInnerHTML={{
-              __html: `${urls.content.rendered}`,
-            }}
-          ></div>
+                >
+                  <Typography sx={{ marginRight: "1vw" }} variant="h5">
+                    {urls.acf?.date}
+                  </Typography>
+                  <Divider
+                    orientation="vertical"
+                    role="presentation"
+                    flexItem
+                    sx={{
+                      borderRightWidth: "2px",
+                      borderColor: "#48494B",
+                      borderRadius: "5px",
+                    }}
+                  ></Divider>
+                  <Typography
+                    sx={{ marginRight: "auto", marginLeft: "1vw" }}
+                    variant="h5"
+                  >
+                    {urls.acf?.readtime}
+                  </Typography>
+                </Grid>
+              </CardContent>
+            </Card>
+            <RenderedContent
+              dangerouslySetInnerHTML={{
+                __html: `${urls.content.rendered}`,
+              }}
+            ></RenderedContent>
+          </Grid>
         </Fragment>
       ))}
     </div>

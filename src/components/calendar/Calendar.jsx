@@ -4,6 +4,8 @@ import { IconButton, Typography, Card } from "@mui/material";
 import { ChevronLeft } from "@mui/icons-material";
 import { ChevronRight } from "@mui/icons-material";
 import TaskList from "./TaskList";
+import Iconify from "../utils/Iconify";
+import useModal from "../../hooks/useModal";
 
 const CalendarControlContainer = styled("div")`
   display: flex;
@@ -94,6 +96,10 @@ const DayCell = styled("div")`
 
 const Calendar = () => {
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const { updateModalState } = useModal();
+  const handleOpenModal = () => {
+    updateModalState(true);
+  };
 
   const handlePreviousMonth = () => {
     setSelectedDate((prevDate) => {
@@ -174,9 +180,40 @@ const Calendar = () => {
   };
   return (
     <CalendarWithTasksContainer>
-      <TaskListContainer sx={{ boxShadow: 4, padding: "2vh 0" }}>
-        <TaskList selectedDate={selectedDate} />
-      </TaskListContainer>
+      <div>
+        <TaskListContainer
+          sx={{
+            boxShadow: 4,
+            padding: "2vh 0",
+            position: "relative",
+            top: "3vh",
+          }}
+        >
+          <TaskList selectedDate={selectedDate} />
+        </TaskListContainer>
+        <IconButton
+          disableRipple
+          sx={{
+            position: "relative",
+            left: "40%",
+          }}
+          onClick={handleOpenModal}
+        >
+          <Iconify
+            icon={"material-symbols:add-circle-rounded"}
+            width={48}
+            height={48}
+            sx={{
+              color: "var(--green)",
+              backgroundColor: "var(--white)",
+              borderRadius: "100%",
+              "&:hover": {
+                color: "var(--yellow)",
+              },
+            }}
+          />
+        </IconButton>
+      </div>
       <CalendarContainer sx={{ boxShadow: 4 }}>
         <CalendarControlContainer>
           <IconButton onClick={handlePreviousMonth}>

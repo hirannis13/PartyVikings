@@ -3,12 +3,35 @@ import { Box, Grid, TextField, Button } from "@mui/material";
 import { useState } from "react";
 import { editUser } from "../../service/authService";
 import useModal from "../../hooks/useModal";
+import { useSnackbar } from "../utils/SnackBarContext";
+import styled from "@emotion/styled";
+
+const ColorButtonSubmit = styled(Button)`
+  color: var(--white);
+  background-color: var(--green);
+  &:hover {
+    color: var(--yellow);
+    background-color: var(--green);
+  }
+`;
+
+const ColorButtonCancel = styled(Button)`
+  color: var(--green);
+  border-style: solid;
+  border-color: var(--green);
+  border-width: 1px;
+  &:hover {
+    color: var(--yellow);
+    background-color: var(--green);
+  }
+`;
 
 function AccountEditForm() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [name, setName] = useState("");
   const [nameError, setNameError] = useState("");
   const { updateModalState } = useModal();
+  const showSnackbar = useSnackbar();
 
   const validateName = () => {
     if (name.trim() === "") {
@@ -32,7 +55,7 @@ function AccountEditForm() {
     if (isNameValid) {
       const data = new FormData(event.currentTarget);
       try {
-        editUser(data.get("name"), selectedImage);
+        editUser(data.get("name"), selectedImage, showSnackbar);
         console.log("User edited successfully");
         updateModalState(false);
       } catch (error) {
@@ -88,20 +111,19 @@ function AccountEditForm() {
         </Grid>
         <Grid container sx={{ justifyContent: "space-between" }}>
           <Grid item>
-            <Button type="submit" variant="contained" sx={{ mt: 3, mb: 2 }}>
+            <ColorButtonSubmit type="submit" sx={{ mt: 3, mb: 2 }}>
               Confirm Edit
-            </Button>
+            </ColorButtonSubmit>
           </Grid>
           <Grid item>
-            <Button
+            <ColorButtonCancel
               onClick={() => {
                 updateModalState(false);
               }}
-              variant="outlined"
               sx={{ mt: 3, mb: 2 }}
             >
               Cancel
-            </Button>
+            </ColorButtonCancel>
           </Grid>
         </Grid>
       </Box>

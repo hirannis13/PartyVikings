@@ -28,7 +28,6 @@ function App() {
   }, [navigate]);
 
   const isRestricted = () => {
-    console.log(currentLocation, "currentLocation");
     if (currentLocation === "/") {
       return;
     } else if (currentLocation === "/signUp") {
