@@ -1,11 +1,7 @@
-import { Button } from "@mui/material";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 import UserList from "../utils/UserList";
 
 function Accounts() {
-  const navigate = useNavigate();
-
   return (
     <>
       <div

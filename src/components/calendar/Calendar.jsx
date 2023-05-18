@@ -12,11 +12,11 @@ const CalendarControlContainer = styled("div")`
 `;
 const TaskListContainer = styled(Card)`
   width: 17vw;
-  border-radius: 1vw;
+  border-radius: 1.7rem;
   height: 50vh;
   display: flex;
   justify-content: center;
-  background: linear-gradient(to bottom, #fff 0%, #fff 10%, #dadedf 100%);
+  background: linear-gradient(to bottom, #6b8d8a 0%, var(--green) 100%);
 `;
 
 const MonthYear = styled(Typography)`
@@ -35,11 +35,11 @@ const CalendarContainer = styled(Card)`
   align-items: center;
   justify-content: flex start;
   flex-direction: column;
-  width: 45%;
+  width: 48%;
   padding: 2rem;
-  border-radius: 1vw;
+  border-radius: 1.7rem;
   height: 50vh;
-  background: linear-gradient(to bottom, #fff 0%, #fff 10%, #dadedf 100%);
+  background-color: white;
 `;
 
 const ArrowIconLeft = styled(ChevronLeft)`
@@ -86,7 +86,7 @@ const DayCell = styled("div")`
     background-color: transparent;
     color: black;
     border-radius: 50%;
-    box-shadow: inset 0 0 0 3px green;
+    box-shadow: inset 0 0 0 3px var(--green);
   }
 `;
 

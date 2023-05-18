@@ -17,7 +17,6 @@ const TaskListContainer = styled("div")`
 const Tasks = styled("div")`
   display: flex;
   flex-direction: column;
-  height: 50vh;
 `;
 
 const TaskList = ({ selectedDate }) => {
@@ -50,22 +49,58 @@ const TaskList = ({ selectedDate }) => {
   return (
     <>
       <TaskListContainer sx={{ height: "100%" }}>
-        <Typography variant="h5" sx={{ margin: "1vh 0 3vh 0" }}>
-          Tasks for {selectedDay}
+        <Typography
+          variant="h5"
+          sx={{
+            margin: "1vh 0 3vh 0",
+            color: "var(--white)",
+            fontWeight: "light",
+          }}
+        >
+          To do for {selectedDay}
         </Typography>
         {tasksFetched &&
           tasks.map((task) => (
             <React.Fragment key={task.id}>
               <Tasks>
-                <Typography>{task.startTime}</Typography>
-                <Typography>
-                  {task.task} <Divider></Divider>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    color: "var(--yellow)",
+                    fontSize: "1.2rem",
+                    fontWeight: "0",
+                    marginBottom: "1vh",
+                  }}
+                >
+                  {task.startTime}
+                </Typography>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    color: "var(--white)",
+                    fontSize: "1.2rem",
+                    fontWeight: "0",
+                  }}
+                >
+                  {task.task}{" "}
+                  <Divider
+                    sx={{
+                      borderColor: "var(--grey)",
+                    }}
+                  ></Divider>
                 </Typography>
               </Tasks>
             </React.Fragment>
           ))}
         {!tasksFetched && (
-          <Typography variant="b1" sx={{ fontSize: "2vh" }}>
+          <Typography
+            variant="h3"
+            sx={{
+              color: "var(--white)",
+              fontSize: "1.2rem",
+              fontWeight: "0",
+            }}
+          >
             No tasks yet
           </Typography>
         )}
