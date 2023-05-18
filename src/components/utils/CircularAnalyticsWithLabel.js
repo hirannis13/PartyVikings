@@ -33,6 +33,7 @@ function CircularAnalyticsWithLabel({ percentage }) {
           color="b1"
           fontSize={"2.3vh"}
           fontWeight={"bold"}
+          sx={{ color: "var(--mtext)" }}
         >{`${percentage}%`}</Typography>
       </Box>
     </Box>

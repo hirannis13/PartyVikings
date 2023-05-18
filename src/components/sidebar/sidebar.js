@@ -46,7 +46,7 @@ export default function TemporaryDrawer() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <div style={{ margin: "3vh 0", height: "7%" }}>
+      <div style={{ margin: "3vh 0 7vh 0", height: "7%" }}>
         <Image
           src={`${process.env.PUBLIC_URL}/images/logo.png`}
           fit="contain"
@@ -59,10 +59,15 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <Iconify
                 icon={"tabler:dashboard"}
-                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+                style={{ color: "var(--highlight)", width: "30", height: "30" }}
               ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Dashboard"} sx={{ color: "#c1c7c9" }} />
+            <ListItemText
+              primary={"Dashboard"}
+              sx={{
+                color: "var(--highlight)",
+              }}
+            />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -70,10 +75,13 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <Iconify
                 icon={"mdi:book-open-page-variant-outline"}
-                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+                style={{ color: "var(--highlight)", width: "30", height: "30" }}
               ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Guidelines"} sx={{ color: "#c1c7c9" }} />
+            <ListItemText
+              primary={"Guidelines"}
+              sx={{ color: "var(--highlight)" }}
+            />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -81,10 +89,10 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <Iconify
                 icon={"tabler:message"}
-                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+                style={{ color: "var(--highlight)", width: "30", height: "30" }}
               ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Chat"} sx={{ color: "#c1c7c9" }} />
+            <ListItemText primary={"Chat"} sx={{ color: "var(--highlight)" }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -92,10 +100,13 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <Iconify
                 icon={"material-symbols:format-list-bulleted-rounded"}
-                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+                style={{ color: "var(--highlight)", width: "30", height: "30" }}
               ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"To do"} sx={{ color: "#c1c7c9" }} />
+            <ListItemText
+              primary={"To do"}
+              sx={{ color: "var(--highlight)" }}
+            />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -103,10 +114,13 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <Iconify
                 icon={"mingcute:folder-upload-line"}
-                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+                style={{ color: "var(--highlight)", width: "30", height: "30" }}
               ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Files"} sx={{ color: "#c1c7c9" }} />
+            <ListItemText
+              primary={"Files"}
+              sx={{ color: "var(--highlight)" }}
+            />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
@@ -114,10 +128,13 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <Iconify
                 icon={"ic:sharp-people"}
-                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+                style={{ color: "var(--highlight)", width: "30", height: "30" }}
               ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Accounts"} sx={{ color: "#c1c7c9" }} />
+            <ListItemText
+              primary={"Accounts"}
+              sx={{ color: "var(--highlight)" }}
+            />
           </ListItemButton>
         </ListItem>
       </List>
@@ -128,10 +145,13 @@ export default function TemporaryDrawer() {
             <ListItemIcon>
               <Iconify
                 icon="ic:round-power-settings-new"
-                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+                style={{ color: "var(--highlight)", width: "30", height: "30" }}
               ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Log Out"} sx={{ color: "#c1c7c9" }} />
+            <ListItemText
+              primary={"Log Out"}
+              sx={{ color: "var(--highlight)" }}
+            />
           </ListItemButton>
         </ListItem>
       </List>
@@ -143,6 +163,7 @@ export default function TemporaryDrawer() {
       {["left"].map((anchor) => (
         <React.Fragment key={"anchor"}>
           <IconButton
+            disableRipple
             size="large"
             edge="start"
             color="inherit"
@@ -155,7 +176,6 @@ export default function TemporaryDrawer() {
                 width: "2vw",
                 height: "2vw",
                 color: "var(--green)",
-                mixBlendMode: "difference",
               }}
             />
           </IconButton>

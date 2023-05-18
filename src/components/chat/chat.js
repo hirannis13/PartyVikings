@@ -16,7 +16,9 @@ function Chat() {
         src={`${process.env.PUBLIC_URL}/images/comingsoon.svg`}
         alt="Coming Soon"
       />
-      <Typography variant="h3">Coming Soon...</Typography>
+      <Typography variant="h3" sx={{ color: "var(--mtext)" }}>
+        Coming Soon...
+      </Typography>
     </div>
   );
 }
