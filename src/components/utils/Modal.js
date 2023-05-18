@@ -3,6 +3,12 @@ import { Dialog, DialogContent, DialogTitle, IconButton } from "@mui/material";
 import Iconify from "./Iconify";
 import useModal from "../../hooks/useModal";
 
+const CustomDialog = styled(Dialog)(() => ({
+  "& .MuiPaper-root": {
+    borderRadius: "1.7rem",
+  },
+}));
+
 const Modal = ({ title, content }) => {
   const { openModal, updateModalState } = useModal();
 
@@ -12,7 +18,12 @@ const Modal = ({ title, content }) => {
 
   return (
     <ModalStyle>
-      <Dialog onClose={handleClose} maxWidth="md" fullWidth open={openModal}>
+      <CustomDialog
+        onClose={handleClose}
+        maxWidth="md"
+        fullWidth
+        open={openModal}
+      >
         <DialogTitle
           sx={{
             textAlign: "center",
@@ -34,7 +45,7 @@ const Modal = ({ title, content }) => {
         >
           {content}
         </DialogContent>
-      </Dialog>
+      </CustomDialog>
     </ModalStyle>
   );
 };
@@ -48,6 +59,8 @@ const ModalStyle = styled("div")`
   display: flex;
   justify-content: center;
   align-items: center;
+  border-radius: 1.7em;
+  background-color: "black";
 `;
 
 export default Modal;

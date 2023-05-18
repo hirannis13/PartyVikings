@@ -15,6 +15,14 @@ import Iconify from "../../components/utils/Iconify";
 import { IconButton } from "@mui/material";
 import { useState } from "react";
 
+export const imageContainer = [
+  { id: 1, imgUrl: `${process.env.PUBLIC_URL}/images/viking1.svg` },
+  { id: 2, imgUrl: `${process.env.PUBLIC_URL}/images/viking2.svg` },
+  { id: 3, imgUrl: `${process.env.PUBLIC_URL}/images/viking3.svg` },
+  { id: 4, imgUrl: `${process.env.PUBLIC_URL}/images/viking4.svg` },
+  { id: 5, imgUrl: `${process.env.PUBLIC_URL}/images/viking5.svg` },
+];
+
 export default function SignUp() {
   const navigate = useNavigate();
 
@@ -25,14 +33,6 @@ export default function SignUp() {
   const [emailError, setEmailError] = useState("");
   const [password, setPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
-
-  const imageContainer = [
-    { id: 1, imgUrl: `${process.env.PUBLIC_URL}/images/viking1.svg` },
-    { id: 2, imgUrl: `${process.env.PUBLIC_URL}/images/viking2.svg` },
-    { id: 3, imgUrl: `${process.env.PUBLIC_URL}/images/viking3.svg` },
-    { id: 4, imgUrl: `${process.env.PUBLIC_URL}/images/viking4.svg` },
-    { id: 5, imgUrl: `${process.env.PUBLIC_URL}/images/viking5.svg` },
-  ];
 
   const validateName = () => {
     if (name.trim() === "") {

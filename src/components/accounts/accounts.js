@@ -15,17 +15,7 @@ function Accounts() {
           width: "90%",
           marginBottom: "5vh",
         }}
-      >
-        <Button
-          variant="outlined"
-          color="info"
-          onClick={() => {
-            navigate("/signUp");
-          }}
-        >
-          Create new account
-        </Button>
-      </div>
+      ></div>
       <UserList />
     </>
   );
