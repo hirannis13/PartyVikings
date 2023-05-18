@@ -9,7 +9,7 @@ import InstagramComponent from "../socialcheck/instagram";
 
 function Dashboard() {
   return (
-    <>
+    <div>
       <Grid
         container
         display={"flex"}
@@ -21,23 +21,23 @@ function Dashboard() {
         <UserWelcome />
         <Grid
           container
-          columnSpacing={"12vw"}
+          columnSpacing={"22vw"}
           rowSpacing={"5vh"}
           justifyContent={"center"}
           marginTop={"7vh "}
         >
           <Grid item>
-            <TiktokComponent />
+            <InstagramComponent />
           </Grid>
           <Grid item>
-            <InstagramComponent />
+            <TiktokComponent />
           </Grid>
         </Grid>
       </Grid>
       <Box marginTop={"13vh"} marginBottom={"10vh"}>
         <Calendar />
       </Box>
-    </>
+    </div>
   );
 }
 

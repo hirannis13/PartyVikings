@@ -7,13 +7,12 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
 import { IconButton } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import { logOut } from "../../service/authService";
 import { useNavigate } from "react-router-dom";
-import "./sidebar.css";
 import Image from "mui-image";
+import Iconify from "../utils/Iconify";
 
 export default function TemporaryDrawer() {
   const [state, setState] = React.useState({
@@ -47,58 +46,78 @@ export default function TemporaryDrawer() {
       onClick={toggleDrawer(anchor, false)}
       onKeyDown={toggleDrawer(anchor, false)}
     >
-      <Image
-        src={`${process.env.PUBLIC_URL}/images/logo.png`}
-        fit="contain"
-        height="10%"
-      />
+      <div style={{ margin: "3vh 0", height: "7%" }}>
+        <Image
+          src={`${process.env.PUBLIC_URL}/images/logo.png`}
+          fit="contain"
+          height="100%"
+        />
+      </div>
       <List>
         <ListItem disablePadding>
           <ListItemButton href="/dashboard">
             <ListItemIcon>
-              <InboxIcon />
+              <Iconify
+                icon={"tabler:dashboard"}
+                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+              ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Dashboard"} />
+            <ListItemText primary={"Dashboard"} sx={{ color: "#c1c7c9" }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton href="/guidelines">
             <ListItemIcon>
-              <InboxIcon />
+              <Iconify
+                icon={"mdi:book-open-page-variant-outline"}
+                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+              ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Guidelines"} />
+            <ListItemText primary={"Guidelines"} sx={{ color: "#c1c7c9" }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton href="/chat">
             <ListItemIcon>
-              <InboxIcon />
+              <Iconify
+                icon={"tabler:message"}
+                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+              ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Chat"} />
+            <ListItemText primary={"Chat"} sx={{ color: "#c1c7c9" }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton href="/todo">
             <ListItemIcon>
-              <InboxIcon />
+              <Iconify
+                icon={"material-symbols:format-list-bulleted-rounded"}
+                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+              ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"To do"} />
+            <ListItemText primary={"To do"} sx={{ color: "#c1c7c9" }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton href="/files">
             <ListItemIcon>
-              <InboxIcon />
+              <Iconify
+                icon={"mingcute:folder-upload-line"}
+                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+              ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Files"} />
+            <ListItemText primary={"Files"} sx={{ color: "#c1c7c9" }} />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
           <ListItemButton href="/accounts">
             <ListItemIcon>
-              <InboxIcon />
+              <Iconify
+                icon={"ic:sharp-people"}
+                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+              ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Accounts"} />
+            <ListItemText primary={"Accounts"} sx={{ color: "#c1c7c9" }} />
           </ListItemButton>
         </ListItem>
       </List>
@@ -107,9 +126,12 @@ export default function TemporaryDrawer() {
         <ListItem disablePadding>
           <ListItemButton onClick={logOutHandler}>
             <ListItemIcon>
-              <InboxIcon />
+              <Iconify
+                icon="ic:round-power-settings-new"
+                style={{ color: "#c1c7c9", width: "30", height: "30" }}
+              ></Iconify>
             </ListItemIcon>
-            <ListItemText primary={"Log Out"} />
+            <ListItemText primary={"Log Out"} sx={{ color: "#c1c7c9" }} />
           </ListItemButton>
         </ListItem>
       </List>
@@ -128,7 +150,14 @@ export default function TemporaryDrawer() {
             sx={{ mr: 2 }}
             onClick={toggleDrawer(anchor, true)}
           >
-            <MenuIcon />
+            <MenuIcon
+              sx={{
+                width: "2vw",
+                height: "2vw",
+                color: "var(--green)",
+                mixBlendMode: "difference",
+              }}
+            />
           </IconButton>
           <Drawer
             anchor={anchor}

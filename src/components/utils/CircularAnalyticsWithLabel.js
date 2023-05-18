@@ -10,7 +10,10 @@ function CircularAnalyticsWithLabel({ percentage }) {
         value={percentage}
         thickness={7}
         size={"13vh"}
-        sx={{ color: "#2A403E", strokeLinecap: "round" }}
+        sx={{
+          color: "white",
+          strokeLinecap: "round",
+        }}
       />
       <Box
         sx={{
@@ -27,8 +30,9 @@ function CircularAnalyticsWithLabel({ percentage }) {
         <Typography
           variant="caption"
           component="div"
-          color="text.secondary"
+          color="b1"
           fontSize={"2.3vh"}
+          fontWeight={"bold"}
         >{`${percentage}%`}</Typography>
       </Box>
     </Box>

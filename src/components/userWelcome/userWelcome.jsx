@@ -37,10 +37,10 @@ const UserWelcome = () => {
       sx={{
         display: "flex",
         height: "15vh",
-        width: "60%",
+        width: "70%",
         justifyContent: "space-between",
         alignItems: "center",
-        borderRadius: "1vw",
+        borderRadius: "1.7rem",
         boxShadow: 4,
       }}
     >
@@ -50,24 +50,28 @@ const UserWelcome = () => {
           display: "flex",
           justifyContent: "center",
           textAlign: "center",
+          zIndex: "2",
+          position: "absolute",
+          left: "0",
         }}
       >
-        <Typography variant="h4">
+        <Typography variant="h3" sx={{ fontSize: "2rem" }}>
           {user ? `Hello, ${user.name}` : "Not logged in"}
         </Typography>
       </CardContent>
       <CardContent sx={{ p: "0" }}>
         <div style={{ position: "relative", overflow: "hidden" }}>
           <img
-            src={`${process.env.PUBLIC_URL}/images/welcomebg.png`}
+            src={`${process.env.PUBLIC_URL}/images/mainimg.png`}
             alt="welcome"
             loading="lazy"
-            width="800vw"
-            height="300vh"
+            width="1500vw"
+            height="auto"
             className="welcome-img"
             style={{
               position: "relative",
               zIndex: 0,
+              marginTop: "15vh",
             }}
           />
           <div

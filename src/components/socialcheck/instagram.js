@@ -34,9 +34,11 @@ const InstagramComponent = () => {
           display: "flex",
           flexDirection: "row",
           maxWidth: "fit-content",
-          borderRadius: "1vw",
-          padding: "3vh 3vw",
+          borderRadius: "1.7rem",
+          padding: "2vh 3vw",
           boxShadow: 4,
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(138, 58, 185, 0.15), rgba(188, 42, 141, 0.15), rgba(251, 173, 80, 0.15))",
         }}
       >
         <Box
@@ -60,8 +62,9 @@ const InstagramComponent = () => {
           <Typography variant="h5">Instagram</Typography>
           <Typography
             variant="h6"
+            fontSize={"1rem"}
             sx={{
-              padding: "0 0 2vh 0",
+              padding: "0 0 1vh 0",
             }}
           >
             {currentDay}

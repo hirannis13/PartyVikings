@@ -34,9 +34,11 @@ const TiktokComponent = () => {
           display: "flex",
           flexDirection: "row",
           maxWidth: "fit-content",
-          borderRadius: "1vw",
-          padding: "3vh 3vw",
+          borderRadius: "1.7rem",
+          padding: "2vh 3vw",
           boxShadow: 4,
+          backgroundImage:
+            "linear-gradient(to bottom, rgba(0, 242, 234, 0.15), rgba(255, 0, 80, 0.15), rgba(0, 0, 0, 0.25))",
         }}
       >
         <Box
@@ -60,8 +62,9 @@ const TiktokComponent = () => {
           <Typography variant="h5">TikTok</Typography>
           <Typography
             variant="h6"
+            fontSize={"1rem"}
             sx={{
-              padding: "0 0 2vh 0",
+              padding: "0 0 1vh 0",
             }}
           >
             {currentDay}

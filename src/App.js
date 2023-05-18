@@ -34,7 +34,17 @@ function App() {
     } else if (currentLocation === "/signUp") {
       return;
     }
-    return <TemporaryDrawer />;
+    return (
+      <div
+        style={{
+          position: "fixed",
+          top: 2,
+          left: 8,
+        }}
+      >
+        <TemporaryDrawer />
+      </div>
+    );
   };
 
   return (
