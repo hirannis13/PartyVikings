@@ -13,6 +13,8 @@ import {
   doc,
   collection,
   getDocs,
+  getDoc,
+  updateDoc,
 } from "firebase/firestore";
 
 // Initialize Firebase
@@ -20,6 +22,7 @@ import {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+
 onAuthStateChanged(auth, (user) => {
   if (user !== null) {
     console.log("Logged in!");
@@ -27,6 +30,39 @@ onAuthStateChanged(auth, (user) => {
     console.log("No user");
   }
 });
+
+export const editUser = (displayName, selectedImage) => {
+  const unsubscribe = onAuthStateChanged(auth, (authUser) => {
+    const user = authUser;
+    if (authUser && authUser.uid === user.uid) {
+      const usersRef = doc(db, "users", authUser.uid);
+      getDoc(usersRef)
+        .then((doc) => {
+          if (doc.exists()) {
+            updateDoc(usersRef, {
+              name: displayName,
+              imgId: selectedImage.id,
+              imgUrl: selectedImage.imgUrl,
+            })
+              .then(() => {
+                unsubscribe();
+              })
+              .catch((updateError) => {
+                // Handle update error here
+                console.error("Failed to update document:", updateError);
+              });
+          } else {
+            // Handle document not found error here
+            console.error("Document does not exist.");
+          }
+        })
+        .catch((getError) => {
+          // Handle get document error here
+          console.error("Failed to get document:", getError);
+        });
+    }
+  });
+};
 
 export const assignName = (navigate, displayName, selectedImage) => {
   const unsubscribe = onAuthStateChanged(auth, (authUser) => {
