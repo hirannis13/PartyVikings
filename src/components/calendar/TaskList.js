@@ -24,9 +24,11 @@ const TaskList = ({ selectedDate }) => {
   const { openModal, updateModalState } = useModal();
   const [tasks, setTasks] = useState({});
   const [tasksFetched, setTasksFetched] = useState(false);
+
   const handleOpenModal = () => {
     updateModalState(true);
   };
+
   const selectedDay = selectedDate.toLocaleDateString();
   let convertedDate = convertSelectedDay(selectedDay);
 
@@ -49,7 +51,7 @@ const TaskList = ({ selectedDate }) => {
     <>
       <TaskListContainer sx={{ height: "100%" }}>
         <Typography variant="h5" sx={{ margin: "1vh 0 3vh 0" }}>
-          Tasks for {convertedDate}
+          Tasks for {selectedDay}
         </Typography>
         {tasksFetched &&
           tasks.map((task) => (

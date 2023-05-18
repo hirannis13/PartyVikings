@@ -10,10 +10,35 @@ import {
   Card,
   CardContent,
   Grid,
+  IconButton,
 } from "@mui/material";
+import Iconify from "./Iconify";
+import Modal from "./Modal";
+import useModal from "../../hooks/useModal";
+import AccountEditForm from "../accounts/addccountEditForm";
+import { auth } from "../../service/authService";
+import { onAuthStateChanged } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
 
 const UserList = () => {
   const [users, setUsers] = useState([]);
+  const { openModal, updateModalState } = useModal();
+  const [currentUser, setCurrentUser] = useState({});
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user !== null) {
+        setCurrentUser(user.email);
+      } else {
+        setCurrentUser(""); // Set a default value if user is null
+      }
+    });
+
+    // Clean up the subscription when the component unmounts
+    return () => unsubscribe();
+  }, []);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -32,7 +57,7 @@ const UserList = () => {
     };
     fetchUsers();
   }, []);
-  //{ id: 1, imgUrl: `${process.env.PUBLIC_URL}/images/viking1.svg` },
+
   const CustomPerson = ({ imageUrl }) => (
     <div>
       {imageUrl && (
@@ -44,65 +69,114 @@ const UserList = () => {
       )}
     </div>
   );
+  const summonEditUserModal = () => {
+    updateModalState(true);
+  };
 
   return (
-    <Box sx={{ width: "100%", display: "flex", justifyContent: "center" }}>
-      {users.length > 0 ? (
-        <Card
-          sx={{
-            width: "20vw",
-            boxShadow: 4,
-            borderRadius: "1vw",
-            padding: "3vh 1vw",
+    <>
+      <Box
+        sx={{
+          width: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          flexDirection: "column",
+        }}
+      >
+        {users.length > 0 ? (
+          <Card
+            sx={{
+              width: "30rem",
+              boxShadow: 4,
+              borderRadius: "1.7rem",
+              padding: "3vh 1vw",
+            }}
+          >
+            {users.map((user) => (
+              <Fragment key={user.id}>
+                <CardContent
+                  sx={{
+                    display: "flex",
+                    flexDirection: "row",
+                    justifyContent: "flex-start",
+                    alignItems: "center",
+                  }}
+                >
+                  <Avatar
+                    sx={{ height: "4rem", width: "4rem", margin: "0 2vw 0 0" }}
+                  >
+                    {user.imgUrl ? (
+                      <CustomPerson
+                        key={user.imgId}
+                        imageUrl={`${process.env.PUBLIC_URL}` + user.imgUrl}
+                      />
+                    ) : (
+                      <Person />
+                    )}
+                  </Avatar>
+                  <Grid>
+                    <Typography
+                      variant="subtitle1"
+                      gutterBottom
+                      sx={{ fontWeight: "bold" }}
+                    >
+                      {user.name}
+                    </Typography>
+                    <Typography variant="body2">{user.email}</Typography>
+                  </Grid>
+                  {currentUser === user.email ? (
+                    <IconButton
+                      sx={{ marginLeft: "auto" }}
+                      onClick={summonEditUserModal}
+                    >
+                      <Iconify
+                        icon={"material-symbols:edit"}
+                        width={24}
+                        height={24}
+                      />
+                    </IconButton>
+                  ) : (
+                    <IconButton disabled />
+                  )}
+                </CardContent>
+                <Divider
+                  orientation="horizontal"
+                  role="presentation"
+                  flexItem
+                  sx={{
+                    borderColor: "#48494B",
+                    borderRadius: "5px",
+                  }}
+                />
+              </Fragment>
+            ))}
+          </Card>
+        ) : (
+          <p>No users found.</p>
+        )}
+        <IconButton
+          sx={{ transform: "translate(0, -2rem)" }}
+          onClick={() => {
+            navigate("/signUp");
           }}
         >
-          {users.map((user) => (
-            <Fragment key={user.id}>
-              <CardContent
-                sx={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "flex-start",
-                  alignItems: "center",
-                }}
-              >
-                <Avatar sx={{ margin: "0 2vw 0 0" }}>
-                  {user.imgUrl ? (
-                    <CustomPerson
-                      key={user.imgId}
-                      imageUrl={`${process.env.PUBLIC_URL}` + user.imgUrl}
-                    />
-                  ) : (
-                    <Person />
-                  )}
-                </Avatar>
-                <Grid>
-                  <Typography
-                    variant="subtitle1"
-                    gutterBottom
-                    sx={{ fontWeight: "bold" }}
-                  >
-                    {user.name}
-                  </Typography>
-                  <Typography variant="body2">{user.email}</Typography>
-                </Grid>
-              </CardContent>
-              <Divider
-                orientation="horizontal"
-                role="presentation"
-                flexItem
-                sx={{
-                  borderColor: "#48494B",
-                  borderRadius: "5px",
-                }}
-              />
-            </Fragment>
-          ))}
-        </Card>
-      ) : (
-        <p>No users found.</p>
+          <Iconify
+            icon={"material-symbols:add-circle-rounded"}
+            width={48}
+            height={48}
+            sx={{
+              color: "black",
+              backgroundColor: "white",
+              borderRadius: "100%",
+            }}
+          />
+        </IconButton>
+      </Box>
+      {openModal && (
+        <Modal title={"Edit the user"} content={<AccountEditForm />} />
       )}
-    </Box>
+    </>
   );
 };
 
