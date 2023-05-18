@@ -119,11 +119,13 @@ const UserList = () => {
                     <Typography
                       variant="subtitle1"
                       gutterBottom
-                      sx={{ fontWeight: "bold" }}
+                      sx={{ fontWeight: "bold", color: "var(--mtext)" }}
                     >
                       {user.name}
                     </Typography>
-                    <Typography variant="body2">{user.email}</Typography>
+                    <Typography variant="body2" sx={{ color: "var(--stext)" }}>
+                      {user.email}
+                    </Typography>
                   </Grid>
                   {currentUser === user.email ? (
                     <IconButton
@@ -156,6 +158,7 @@ const UserList = () => {
           <p>No users found.</p>
         )}
         <IconButton
+          disableRipple
           sx={{ transform: "translate(0, -2rem)" }}
           onClick={() => {
             navigate("/signUp");
@@ -166,7 +169,7 @@ const UserList = () => {
             width={48}
             height={48}
             sx={{
-              color: "black",
+              color: "var(--green)",
               backgroundColor: "white",
               borderRadius: "100%",
             }}
