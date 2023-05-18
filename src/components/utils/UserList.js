@@ -89,7 +89,7 @@ const UserList = () => {
             sx={{
               width: "30rem",
               boxShadow: 4,
-              borderRadius: "1vw",
+              borderRadius: "1.7rem",
               padding: "3vh 1vw",
             }}
           >
