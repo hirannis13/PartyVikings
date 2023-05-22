@@ -39,9 +39,10 @@ function Guidelines() {
   ];
 
   const urls = [
-    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/photography?_embed&v=9999",
+    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/content_creation?_embed&v=9999",
     "https://partyvikings.dorikeczko.com/wp-json/wp/v2/communication?_embed&v=9999",
-    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/graphic?_embed&v=9999",
+    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/specific_socialmedia?_embed&v=9999",
+    "https://partyvikings.dorikeczko.com/wp-json/wp/v2/general_social_media?_embed&v=9999",
   ];
 
   useEffect(() => {
