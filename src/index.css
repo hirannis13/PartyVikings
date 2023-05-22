@@ -20,3 +20,9 @@ html {
   --mtext: #2c2c2c;
   --highlight: #c1c7c9;
 }
+
+@font-face {
+  font-family: "FontFace";
+  src: url("../public/fonts/NotoSansKR-Regular.otf");
+  font-weight: 400;
+}

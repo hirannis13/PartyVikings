@@ -63,6 +63,7 @@ function BlogCard({ data }) {
               height: "40vh",
               display: "flex",
               flexDirection: "column",
+              borderRadius: "1.2rem",
             }}
             key={index}
           >
@@ -81,8 +82,7 @@ function BlogCard({ data }) {
                 {urls.acf?.title}
               </Typography>
               <TwoLineText variant="h6" color="text.secondary">
-                oohelooohel olheloo hellohellohel oohelooohelo lheloohellohell
-                oheloohelooohelolheloo
+                Open this blog of you want to know more about it!
               </TwoLineText>
             </CardContent>
             <CardActions
@@ -98,14 +98,16 @@ function BlogCard({ data }) {
                   handleOpenPost(urls);
                 }}
                 sx={{
-                  color: "#2A403E",
-                  border: "#2A403E 0.5px solid",
+                  color: "var(--green)",
+                  borderRadius: "0.7rem",
+                  textTransform: "lowercase",
+                  border: "var(--green) 0.2px solid",
                   boxShadow: 2,
-                  fontSize: "1rem",
+                  fontSize: "0.9rem",
                   width: "fit-content",
                   "&:hover": {
-                    backgroundColor: "#2a4035",
-                    color: "#fff",
+                    backgroundColor: "var(--green)",
+                    color: "var(--white)",
                   },
                 }}
               >

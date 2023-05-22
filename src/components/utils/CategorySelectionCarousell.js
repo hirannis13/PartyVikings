@@ -10,6 +10,7 @@ const CarouselContainer = styled("div")`
   margin: 0 0 2vh 0;
   justify-content: center;
   background-color: #2a403e;
+  color: var(--white);
 `;
 
 const CardStyled = styled(Card)(({ active, pictureurl, issearchcard }) => ({
@@ -17,8 +18,8 @@ const CardStyled = styled(Card)(({ active, pictureurl, issearchcard }) => ({
   maxWidth: "17%",
   margin: "0 8px",
   height: active === "true" ? "20vh" : "15vh",
-  backgroundColor: active === "true" ? "#3f51b5" : "#eee",
-  color: active === "true" ? "#000" : "inherit",
+  backgroundColor: active === "true" ? "var(--white)" : "var(--white)",
+  color: active === "true" ? "(var(--white))" : "var(--white)",
   backgroundImage: `url(${pictureurl})`,
   backgroundSize: "cover",
   backgroundPosition: "center",
@@ -27,6 +28,7 @@ const CardStyled = styled(Card)(({ active, pictureurl, issearchcard }) => ({
     alignItems: "center",
     justifyContent: "center",
     flexDirection: "column",
+    borderRadius: "1.7rem",
   }),
 }));
 

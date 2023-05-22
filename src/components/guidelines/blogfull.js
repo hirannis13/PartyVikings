@@ -14,7 +14,7 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 
 const RenderedContent = styled("div")`
-  margin: 10vh 10vw 0 10vw;
+  margin: 10vh 15vw 0 15vw;
 `;
 
 function BlogFull(data) {
@@ -36,11 +36,13 @@ function BlogFull(data) {
         onClick={() => {
           navigate(-1);
         }}
+        sx={{ position: "absolute", left: "11vw", top: "7vh" }}
       >
         <Iconify
           icon={"material-symbols:arrow-back-rounded"}
           width={24}
           height={24}
+          color={"var(--highlight)"}
         />
       </IconButton>
       {Object.values(data).map((urls, index) => (
@@ -62,14 +64,18 @@ function BlogFull(data) {
                 width: "80vw",
                 height: "40vh",
                 boxShadow: 4,
-                borderRadius: "1vw",
+                borderRadius: "1.7rem",
+                backgroundColor: "var(--green)",
+                marginTop: "5vh",
               }}
             >
               <CardMedia
                 sx={{
-                  height: "100%",
+                  width: "25vw",
                   transformOrigin: "center",
+                  marginLeft: "9%",
                   transform: "scale(1)",
+                  borderRadius: "1.7rem",
                 }}
                 component="img"
                 image={urls.acf?.mainimg.url}
@@ -86,8 +92,18 @@ function BlogFull(data) {
                   alignItems: "left",
                 }}
               >
-                <Typography variant="h6">{urls.acf?.category}</Typography>
-                <Typography variant="h3" sx={{ margin: "2vh 0 6vh 0" }}>
+                <Typography
+                  variant="h6"
+                  sx={{
+                    color: "var(--stext)",
+                  }}
+                >
+                  {urls.acf?.category}
+                </Typography>
+                <Typography
+                  variant="h3"
+                  sx={{ margin: "2vh 0 6vh 0", color: "var(--white)" }}
+                >
                   {urls.acf?.title}
                 </Typography>
                 <Grid
@@ -97,7 +113,10 @@ function BlogFull(data) {
                     width: "30vw",
                   }}
                 >
-                  <Typography sx={{ marginRight: "1vw" }} variant="h5">
+                  <Typography
+                    sx={{ marginRight: "1vw", color: "var(--stext)" }}
+                    variant="h5"
+                  >
                     {urls.acf?.date}
                   </Typography>
                   <Divider
@@ -106,12 +125,16 @@ function BlogFull(data) {
                     flexItem
                     sx={{
                       borderRightWidth: "2px",
-                      borderColor: "#48494B",
+                      borderColor: "var(--stext)",
                       borderRadius: "5px",
                     }}
                   ></Divider>
                   <Typography
-                    sx={{ marginRight: "auto", marginLeft: "1vw" }}
+                    sx={{
+                      marginRight: "auto",
+                      marginLeft: "1vw",
+                      color: "var(--stext)",
+                    }}
                     variant="h5"
                   >
                     {urls.acf?.readtime}

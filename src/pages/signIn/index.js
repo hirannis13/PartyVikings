@@ -1,5 +1,4 @@
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
-import Avatar from "@mui/material/Avatar";
+import Image from "mui-image";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -78,9 +77,13 @@ export default function SignIn() {
               alignItems: "center",
             }}
           >
-            <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-              <LockOutlinedIcon />
-            </Avatar>
+            <div style={{ margin: "3vh 0 7vh 0", height: "7%" }}>
+              <Image
+                src={`${process.env.PUBLIC_URL}/images/logodark.svg`}
+                fit="contain"
+                height="100%"
+              />
+            </div>
             <Typography component="h1" variant="h5">
               Sign in
             </Typography>
